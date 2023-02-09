@@ -1,12 +1,12 @@
-import Login from "./Login/Login";
-import Signup from "./SignUp/Signup";
+// import Login from "./Login/Login";
+// import Signup from "./SignUp/Signup";
+import CreateForm from "./CreateForm.js";
 
 function App() {
   return (
-    <>
-      <Login />
-      <Signup />
-    </>
+    <div>
+      <CreateForm/>
+    </div>
   );
 }
 
