@@ -1,9 +1,12 @@
+import Login from "./Login/Login";
+import Signup from "./SignUp/Signup";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to formgenerator</h1>
-    </div>
+    <>
+      <Login />
+      <Signup />
+    </>
   );
 }
 
