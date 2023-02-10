@@ -1,5 +1,7 @@
-// import Login from "./Login/Login";
-// import Signup from "./SignUp/Signup";
+import Login from "./Login/Login";
+import Signup from "./SignUp/Signup";
+import Home from "./Home/Home";
+
 import CreateForm from "./CreateForm.js";
 
 function App() {
