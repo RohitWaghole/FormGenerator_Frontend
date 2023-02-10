@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MCQ from './Elements/MCQ.js';
 import ShortAns from './Elements/ShortAns.js';
 import Date from './Elements/Date.js';
+import formApi from './API/FormData.js'
 
 export default class CreateForm extends Component {
 
@@ -68,10 +69,12 @@ export default class CreateForm extends Component {
         
     }
 
-    handlePublish = () => {
+    handlePublish = async() => {
         //code to handle submit
         console.log("Fields :")
         console.log(this.formConfiguration)
+
+        // const res = await formApi.post('/saveForm', userCred);
     }
 
 

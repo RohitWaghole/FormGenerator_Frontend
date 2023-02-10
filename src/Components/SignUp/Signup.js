@@ -1,20 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Signup.css";
+import handleSingup from "../Auth/HandleSignup.js";
+
 
 const Signup = () => {
-  const [userCreds, setUserCreds] = useState({ email: "", password: "" });
-  const submitForm = (event) => {
+
+  const navigate = useNavigate();
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const userInput = {
-      email: event.target.email.value,
-      password: event.target.password.value,
-      confirmPassword: event.target.confirmPassword.value,
-    };
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const confirmPassword = event.target.confirmPassword.value;
 
-    setUserCreds(userInput);
+    if (email === '' || password === '' || confirmPassword === '' || email === null || password === null || confirmPassword === null) {
+      alert("All detals are mandatory !")
+    }
+
+    else {
+      const userInput = {
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword,
+      };
+
+      const accessFlag = await handleSingup(userInput);
+
+      if (accessFlag === true) {
+        alert("User Registered Succesfully")
+      }
+      else {
+        alert("Failed, try again")
+      }
+    }
   };
-
-  useEffect(() => {}, [userCreds]);
 
   return (
     <div>
@@ -24,7 +45,7 @@ const Signup = () => {
 
       <div className="container">
         <h1>Sign Up</h1>
-        <form action="" onSubmit={submitForm}>
+        <form action="" onSubmit={handleSubmit}>
           <div className="item">
             <label htmlFor="email">Email&nbsp;&nbsp;&nbsp;</label>
             <input
@@ -33,7 +54,6 @@ const Signup = () => {
               name="email"
               id="email"
               autoComplete="off"
-              onChange={(event) => setUserCreds({ email: event.target.value })}
             ></input>
           </div>
 
@@ -44,9 +64,6 @@ const Signup = () => {
               name="password"
               id="password"
               autoComplete="off"
-              onChange={(event) =>
-                setUserCreds({ password: event.target.value })
-              }
             ></input>
           </div>
 
@@ -59,9 +76,6 @@ const Signup = () => {
               name="confirmPassword"
               id="confirmPassword"
               autoComplete="off"
-              onChange={(event) =>
-                setUserCreds({ confirmPassword: event.target.value })
-              }
             ></input>
           </div>
 
@@ -71,7 +85,7 @@ const Signup = () => {
         </form>
         <div className="item">
           <span>
-            Already have an account?<a href="#"> Log in</a>
+            Already have an account?<button onClick={() => { navigate('/') }}> Log in</button>
           </span>
         </div>
       </div>

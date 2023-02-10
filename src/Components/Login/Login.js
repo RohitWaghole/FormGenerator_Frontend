@@ -1,19 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Login.css";
+import handleLogin from "../Auth/HandleLogin";
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
-  const [userCreds, setUserCreds] = useState({ email: "", password: "" });
-  const submitForm = (event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const userInput = {
-      email: event.target.email.value,
-      password: event.target.password.value,
-    };
 
-    setUserCreds(userInput);
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    //validation
+    if (email === '' || password === '' || email === null || password === null) {
+      alert("All detals are mandatory !")
+    }
+
+    else {
+      const userInput = {
+        email: email,
+        password: password,
+      };
+
+      const accessFlag = await handleLogin(userInput);
+
+      if (accessFlag === true) {
+        //navigate to User Home Page
+        navigate('/user/home')
+      }
+      else {
+        alert("Invali Detils!")
+      }
+    }
   };
-
-  useEffect(() => {}, [userCreds]);
 
   return (
     <>
@@ -23,7 +44,7 @@ const Login = () => {
 
       <div className="container">
         <h1>Log In</h1>
-        <form action="" onSubmit={submitForm}>
+        <form action="" onSubmit={handleSubmit}>
           <div className="item">
             <label htmlFor="email">Email&nbsp;&nbsp;&nbsp;</label>
             <input
@@ -32,7 +53,6 @@ const Login = () => {
               name="email"
               id="email"
               autoComplete="off"
-              onChange={(event) => setUserCreds({ email: event.target.value })}
             ></input>
           </div>
 
@@ -43,15 +63,12 @@ const Login = () => {
               name="password"
               id="password"
               autoComplete="off"
-              onChange={(event) =>
-                setUserCreds({ password: event.target.value })
-              }
             ></input>
           </div>
 
           <div className="item">
             <span>
-              <a href="#">Forgot Password?</a>
+              <button onClick={() => { navigate('/forgotPassword') }}>Forgot Password?</button>
             </span>
           </div>
 
@@ -61,7 +78,7 @@ const Login = () => {
         </form>
         <div className="item">
           <span>
-            Don't have an account?<a href="#">Sign up</a>
+            Don't have an account?<button onClick={() => { navigate('/signup') }}>Sign up</button>
           </span>
         </div>
       </div>
