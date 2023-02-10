@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MCQ from './Elements/MCQ.js';
 import ShortAns from './Elements/ShortAns.js';
+import Date from './Elements/Date.js';
 
 export default class CreateForm extends Component {
 
@@ -11,9 +12,16 @@ export default class CreateForm extends Component {
     elements = [
         { name: "MCQ" },
         { name: "short_ans" },
+        {name : "date"}
+        //add more elements here
     ]
+
+    //count for all elements
     MCQCount = 0;
     ShortAnsCount = 0;
+    DateCount=0;
+
+    //array to save form configuration
     formConfiguration = []
 
 
@@ -36,6 +44,7 @@ export default class CreateForm extends Component {
         ev.preventDefault();
     }
 
+
     onDrop = (ev) => {
         if (ev.dataTransfer.getData("fieldID") === 'MCQ') {
             this.setState(prevState => ({
@@ -49,6 +58,14 @@ export default class CreateForm extends Component {
             }))
             this.ShortAnsCount = this.ShortAnsCount + 1
         }
+
+        else if (ev.dataTransfer.getData("fieldID") === 'date') {
+            this.setState(prevState => ({
+                fields: [...prevState.fields, <Date id={this.DateCount} addFormConfiguration={this.addFormConfiguration} />]
+            }))
+            this.DateCount = this.DateCount + 1
+        }
+        
     }
 
     handlePublish = () => {
@@ -73,8 +90,11 @@ export default class CreateForm extends Component {
         });
 
         return (
+
+            // root container
             <div style={{ display: 'flex', height: '100%', marginTop: "50px" }}>
 
+                {/* left container */}
                 <div className="container-drag" style={{ width: '30%', background: 'skyblue' }}>
 
                     <h2 className="task-header">All Elements</h2>
@@ -85,6 +105,7 @@ export default class CreateForm extends Component {
 
                 </div>
 
+                {/* right container */}
                 <div style={{ width: '70%', background: 'orange' }}>
 
                     <h2 className="task-header">Form Elements</h2>
@@ -96,8 +117,9 @@ export default class CreateForm extends Component {
                             })
                         }
                     </ul>
-
-                    <div style={{border: "2px solid black", width: "500px", height: "30px", backgroundColor: "lightgray", padding: "10px"}} onDragOver={(e) => this.onDragOver(e)} onDrop={(e) => this.onDrop(e)}>
+                    
+                    {/* Droppable Area */}
+                    <div style={{border: "2px solid black", width: "300px", height: "30px", backgroundColor: "lightgray", padding: "10px"}} onDragOver={(e) => this.onDragOver(e)} onDrop={(e) => this.onDrop(e)}>
                         Drag Here
                     </div>
 
