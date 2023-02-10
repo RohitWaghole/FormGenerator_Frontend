@@ -74,6 +74,9 @@ export default class CreateForm extends Component {
         console.log("Fields :")
         console.log(this.formConfiguration)
 
+        const querRes=await formApi.post('/saveform',{formConf:{  formID:"1",fields:this.formConfiguration},email:"abc"})
+
+        console.log(querRes.data)
         // const res = await formApi.post('/saveForm', userCred);
     }
 
