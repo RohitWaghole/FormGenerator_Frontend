@@ -1,0 +1,10 @@
+.container {
+    border: 1px solid;
+    /* border-radius: 40px; */
+    /* border-top: 6px solid black; */
+    margin: auto;
+    width: 62%;
+    text-align: center;
+    height: 174px;
+    margin-top: 46px;
+}
