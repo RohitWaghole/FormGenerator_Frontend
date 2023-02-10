@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const Date = (props) => {
-  const [label, setLabel] = useState("Date");
+const Time = (props) => {
+  const [label, setLabel] = useState("Time");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
@@ -10,8 +10,8 @@ const Date = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `Date_${props.id}`,
-      type: "date",
+      id: `Time_${props.id}`,
+      type: "Time",
       label: label,
     };
     props.addFormConfiguration(field);
@@ -19,11 +19,10 @@ const Date = (props) => {
 
   return (
     <div>
-      <input value={label} onChange={handleLabelChange} />
-      <br></br>
-      <input type="date"></input>
+      <h3>Time</h3>
+      <input type="time" value={label} onChange={handleLabelChange} />
     </div>
   );
 };
 
-export default Date;
+export default Time;
