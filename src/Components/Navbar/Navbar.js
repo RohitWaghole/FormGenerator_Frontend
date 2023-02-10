@@ -3,23 +3,31 @@ import "./Navbar.css";
 
 const Navbar = () => {
   return (
-    <div>
-      <nav>
+    <div className="navbar-root">
+      <nav className="navbar">
         <ul className="menu">
           <div>
             <li className="logo">
-              <a href="#">Form Generator</a>
+              <a className="navigate" href="#">
+                Form Generator
+              </a>
             </li>
           </div>
           <div className="menu">
             <li className="item">
-              <a href="#">Home</a>
+              <a className="navigate" href="#">
+                Home
+              </a>
             </li>
             <li className="item">
-              <a href="#">About Us</a>
+              <a className="navigate" href="#">
+                About Us
+              </a>
             </li>
             <li className="item">
-              <a href="#">User</a>
+              <a className="navigate" href="#">
+                User
+              </a>
             </li>
           </div>
         </ul>

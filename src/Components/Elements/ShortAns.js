@@ -1,27 +1,27 @@
-import React from 'react';
-import { useState ,useEffect} from 'react';
+import React from "react";
+import { useState, useEffect } from "react";
 
 const ShortAns = (props) => {
-  const [label, setLabel] = useState('label')
+  const [label, setLabel] = useState("Type your question here");
 
   const handleLabelChange = (e) => {
-    setLabel(e.target.value)
-  }
+    setLabel(e.target.value);
+  };
 
-  useEffect(()=>{
-    const field={
-      id:`ShortAns_${props.id}`,
-      type:"short_ans",
-      label:label
-    }
-    props.addFormConfiguration(field)
-  })
+  useEffect(() => {
+    const field = {
+      id: `ShortAns_${props.id}`,
+      type: "short_ans",
+      label: label,
+    };
+    props.addFormConfiguration(field);
+  });
 
   return (
     <div>
-      <input value={label} onChange={handleLabelChange}/>
+      <input value={label} onChange={handleLabelChange} />
       <br></br>
-      <input type='text'></input>
+      <input type="text"></input>
     </div>
   );
 };

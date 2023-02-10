@@ -17,18 +17,20 @@ const Signup = () => {
   useEffect(() => {}, [userCreds]);
 
   return (
-    <div>
+    <div className="signup-root">
       <div className="formBuilder formSupport">
         <h1>Get started with your Form Generator journey!</h1>
       </div>
 
-      <div className="container">
+      <div className="signupContainer loginContainer">
         <h1>Sign Up</h1>
         <form action="" onSubmit={submitForm}>
           <div className="item">
-            <label htmlFor="email">Email&nbsp;&nbsp;&nbsp;</label>
+            <label className="label" htmlFor="email">
+              Email&nbsp;&nbsp;&nbsp;
+            </label>
             <input
-              className="item1"
+              className="item1 input"
               type="text"
               name="email"
               id="email"
@@ -38,8 +40,11 @@ const Signup = () => {
           </div>
 
           <div className="item">
-            <label htmlFor="password">Password&nbsp;&nbsp;&nbsp;</label>
+            <label className="label" htmlFor="password">
+              Password&nbsp;&nbsp;&nbsp;
+            </label>
             <input
+              className="input"
               type="password"
               name="password"
               id="password"
@@ -51,10 +56,11 @@ const Signup = () => {
           </div>
 
           <div className="item">
-            <label htmlFor="confirmPassword">
+            <label className="label" htmlFor="confirmPassword">
               Confirm Password&nbsp;&nbsp;
             </label>
             <input
+              className="input"
               type="password"
               name="confirmPassword"
               id="confirmPassword"
