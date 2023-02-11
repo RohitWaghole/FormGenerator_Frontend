@@ -8,6 +8,7 @@ import Email from "../Elements/Email.js";
 import LongAns from "../Elements/LongAns.js";
 import Phone from "../Elements/Phone.js";
 import Time from "../Elements/Time.js";
+import Preview from '../Preview/Preview.js'
 import "./CreateForm.css";
 import formApi from '../../API/FormData.js'
 import Navbar from "../Navbar/Navbar.js";
@@ -166,10 +167,15 @@ export default class CreateForm extends Component {
     console.log("Fields :")
     console.log(this.formConfiguration)
 
-    const querRes = await formApi.post('/saveform', { formConf: { formID: "2", fields: this.formConfiguration }, email: this.props.email })
+    const querRes = await formApi.post('/saveform', { formConf: { fromName:"formName",formID: "2", fields: this.formConfiguration }, email: this.props.email })
 
     console.log(querRes.data)
   };
+
+
+  handlePreview=async()=>{
+    // this.props.navigation.navigate('/preview')
+  }
 
   render() {
     var allElements = [];
@@ -238,6 +244,12 @@ export default class CreateForm extends Component {
             <div className="publish-btn-div">
               <button className="publish-btn" onClick={this.handlePublish}>
                 Publish{" "}
+              </button>
+            </div>
+
+            <div className="publish-btn-div">
+              <button className="publish-btn" onClick={this.handlePreview}>
+                Preview{" "}
               </button>
             </div>
           </div>

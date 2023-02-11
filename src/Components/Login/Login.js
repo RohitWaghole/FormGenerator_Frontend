@@ -70,16 +70,14 @@ const Login = (props) => {
               autoComplete="off"
             ></input>
           </div>
-
+          <button className="btn" type="submit">
+            Submit
+          </button>
           <div className="item">
             <span>
               <button onClick={() => { navigate('/forgotPassword') }}>Forgot Password?</button>
             </span>
           </div>
-
-          <button className="btn" type="submit">
-            Submit
-          </button>
         </form>
         <div className="item">
           <span>
