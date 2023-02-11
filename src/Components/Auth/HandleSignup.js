@@ -4,7 +4,7 @@ import userApi from "../API/UserData.js";
 const handleSignup = async (userCred) => {
 
     console.log(userCred)
-    const res = await userApi.post('/register', userCred);
+    const res = await userApi.post('/signup', userCred);
 
     if(res.data.status===true){
         console.log(res.data.massage)

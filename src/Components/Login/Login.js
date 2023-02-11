@@ -4,7 +4,7 @@ import handleLogin from "../Auth/HandleLogin";
 import { useNavigate } from "react-router-dom";
 
 
-const Login = () => {
+const Login = (props) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -28,7 +28,8 @@ const Login = () => {
 
       if (accessFlag === true) {
         //navigate to User Home Page
-        navigate('/user/home')
+        props.getEmail(email)
+        navigate('/user/home') 
       }
       else {
         alert("Invali Detils!")

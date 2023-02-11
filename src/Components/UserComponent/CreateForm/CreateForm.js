@@ -9,7 +9,8 @@ import LongAns from "../Elements/LongAns.js";
 import Phone from "../Elements/Phone.js";
 import Time from "../Elements/Time.js";
 import "./CreateForm.css";
-import formApi from '../API/FormData.js'
+import formApi from '../../API/FormData.js'
+import Navbar from "../Navbar/Navbar.js";
 
 
 export default class CreateForm extends Component {
@@ -67,49 +68,41 @@ export default class CreateForm extends Component {
   onDrop = (ev) => {
     if (ev.dataTransfer.getData("fieldID") === "MCQ") {
       this.setState((prevState) => ({
-        fields: [
-          ...prevState.fields,
-          <MCQ
-            id={this.MCQCount}
-            addFormConfiguration={this.addFormConfiguration}
-          />,
-        ],
-      }));
+        fields: [...prevState.fields, <MCQ id={this.MCQCount} addFormConfiguration={this.addFormConfiguration} />],
+      }
+      ));
+
       this.MCQCount = this.MCQCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "short_ans") {
+    }
+
+    else if (ev.dataTransfer.getData("fieldID") === "short_ans") {
       this.setState((prevState) => ({
-        fields: [
-          ...prevState.fields,
-          <ShortAns
-            id={this.ShortAnsCount}
-            addFormConfiguration={this.addFormConfiguration}
-          />,
-        ],
-      }));
+        fields: [...prevState.fields, <ShortAns id={this.ShortAnsCount} addFormConfiguration={this.addFormConfiguration} />],
+      }
+      ));
+
       this.ShortAnsCount = this.ShortAnsCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "Date") {
+    }
+
+    else if (ev.dataTransfer.getData("fieldID") === "Date") {
       this.setState((prevState) => ({
-        fields: [
-          ...prevState.fields,
-          <Date
-            id={this.DateCount}
-            addFormConfiguration={this.addFormConfiguration}
-          />,
-        ],
-      }));
+        fields: [...prevState.fields, <Date id={this.DateCount} addFormConfiguration={this.addFormConfiguration}/>],
+      }
+      ));
+
       this.DateCount = this.DateCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "Heading") {
+    } 
+    
+    else if (ev.dataTransfer.getData("fieldID") === "Heading") {
       this.setState((prevState) => ({
-        fields: [
-          ...prevState.fields,
-          <Heading
-            id={this.HeadingCount}
-            addFormConfiguration={this.addFormConfiguration}
-          />,
-        ],
-      }));
+        fields: [...prevState.fields, <Heading id={this.HeadingCount} addFormConfiguration={this.addFormConfiguration}/> ],
+      }
+      ));
+
       this.HeadingCount = this.HeadingCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "FullName") {
+    }
+
+    else if (ev.dataTransfer.getData("fieldID") === "FullName") {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,
@@ -169,13 +162,11 @@ export default class CreateForm extends Component {
 
   handlePublish = async () => {
     //code to handle submit
-    console.log("Fields :");
-    console.log(this.formConfiguration);
 
     console.log("Fields :")
     console.log(this.formConfiguration)
 
-    const querRes = await formApi.post('/saveform', { formConf: { formID: "2", fields: this.formConfiguration }, email: "abc" })
+    const querRes = await formApi.post('/saveform', { formConf: { formID: "2", fields: this.formConfiguration }, email: this.props.email })
 
     console.log(querRes.data)
   };
@@ -198,54 +189,57 @@ export default class CreateForm extends Component {
 
     return (
       // root container
-      <div className="container-root1">
-        {/* left container */}
-        <div className="container-drag">
-          <div className="task-header">
-            <h2>All Elements</h2>
+      <div>
+        <Navbar />
+        <div className="container-root1">
+          {/* left container */}
+          <div className="container-drag">
+            <div className="task-header">
+              <h2>All Elements</h2>
+            </div>
+
+            <div
+              className="elementList"
+              onDragOver={(e) => this.onDragOver(e)}
+              onDrop={(e) => {
+                this.onDrop(e);
+              }}
+            >
+              {allElements}
+            </div>
           </div>
 
-          <div
-            className="elementList"
-            onDragOver={(e) => this.onDragOver(e)}
-            onDrop={(e) => {
-              this.onDrop(e);
-            }}
-          >
-            {allElements}
-          </div>
-        </div>
+          {/* right container */}
+          <div className="container-right" id="container-right">
+            <div className="task-header">
+              <h2>Form Elements</h2>
+            </div>
 
-        {/* right container */}
-        <div className="container-right" id="container-right">
-          <div className="task-header">
-            <h2>Form Elements</h2>
-          </div>
+            <ul>
+              {this.state.fields.map((el, index) => {
+                return (
+                  <li className="added-elements" key={index}>
+                    {el}
+                    <hr></hr>
+                  </li>
+                );
+              })}
+            </ul>
 
-          <ul>
-            {this.state.fields.map((el, index) => {
-              return (
-                <li className="added-elements" key={index}>
-                  {el}
-                  <hr></hr>
-                </li>
-              );
-            })}
-          </ul>
-
-          {/* Droppable Area */}
-          <div
-            className="droppable-area"
-            onDragOver={(e) => this.onDragOver(e)}
-            onDrop={(e) => this.onDrop(e)}
-            id="target-div"
-          >
-            <div className="drag-text">Drag Here</div>
-          </div>
-          <div className="publish-btn-div">
-            <button className="publish-btn" onClick={this.handlePublish}>
-              Publish{" "}
-            </button>
+            {/* Droppable Area */}
+            <div
+              className="droppable-area"
+              onDragOver={(e) => this.onDragOver(e)}
+              onDrop={(e) => this.onDrop(e)}
+              id="target-div"
+            >
+              <div className="drag-text">Drag Here</div>
+            </div>
+            <div className="publish-btn-div">
+              <button className="publish-btn" onClick={this.handlePublish}>
+                Publish{" "}
+              </button>
+            </div>
           </div>
         </div>
       </div>
