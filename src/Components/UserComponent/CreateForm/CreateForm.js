@@ -14,7 +14,7 @@ import formApi from '../../API/FormData.js'
 import Navbar from "../Navbar/Navbar.js";
 
 
-export default class CreateForm extends Component {
+class CreateForm extends Component {
   state = {
     fields: [],
   };
@@ -174,7 +174,7 @@ export default class CreateForm extends Component {
 
 
   handlePreview=async()=>{
-    // this.props.navigation.navigate('/preview')
+    this.props.navigate('/user/preview',{ state:this.formConfiguration })
   }
 
   render() {
@@ -258,3 +258,6 @@ export default class CreateForm extends Component {
     );
   }
 }
+
+
+export default CreateForm

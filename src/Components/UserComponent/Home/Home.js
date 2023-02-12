@@ -29,11 +29,11 @@ const Home = (props) => {
       <div>
         <ul>
           {forms.map((form,index)=>{
-            return <li>Form {index+1} :{form.formID}</li>
+            return <li key={index}>Form {index+1} :{form.formID}</li>
           })}
         </ul>
       </div>
-      <button onClick={()=>{navigate('/user/createNew')}}>Create New Form</button>
+      <button onClick={()=>{navigate('/user/createNew',{state:{navigate:navigate}} )}}>Create New Form</button>
     </div>
   );
 };
