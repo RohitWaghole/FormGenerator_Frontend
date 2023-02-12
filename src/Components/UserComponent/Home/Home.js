@@ -26,9 +26,9 @@ const Home = (props) => {
 
     <div className="home-root">
       <Navbar />
-
+    
+      
       <div>
-
         <div className="container-left">
           <div className="main"><span>Created Forms</span></div>
           <div className="subItem"><span className="boxFont">Form 1 <i className="fa fa-trash" aria-hidden="true"></i></span></div>
@@ -36,17 +36,18 @@ const Home = (props) => {
           <div className="subItem"><span className="boxFont">Form 3</span></div>
         </div>
 
-        <div className="container">
-          <button className="createBtn" onClick={() => { navigate('/user/createNew') }}>Create New Form </button>
-        </div>
+        
 
-      </div>
       <ul>
-        {forms.map((form, index) => {
-          return <li>Form {index + 1} :{form.formID}</li>
-        })}
-      </ul>
-    </div>
+          {forms.map((form,index)=>{
+            return <li key={index}>Form {index+1} :{form.formName}</li>
+          })}
+        </ul>
+      </div >
+      <div className="container">
+       <button onClick={() => { navigate('/user/createNew', { state: { navigate: navigate } }) }}>Create New Form</button>
+       </div>
+    </div >
 
 
   );

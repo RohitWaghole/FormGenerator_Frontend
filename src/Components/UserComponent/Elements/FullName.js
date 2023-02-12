@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import "./Elements.css";
 
 const FullName = (props) => {
-  const [label, setLabel] = useState("Enter your name here");
+  const [label, setLabel] = useState("");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
@@ -18,9 +19,16 @@ const FullName = (props) => {
   });
 
   return (
-    <div>
-      <h3>Name</h3>
-      <input type="text" value={label} onChange={handleLabelChange} />
+    <div className="element-name">
+      <h3 className="element-field-name">Name</h3>
+      <input
+        className="element-input element-border-style"
+        placeholder="Enter your name here"
+        type="text"
+        value={label}
+        onChange={handleLabelChange}
+        maxLength={60}
+      />
     </div>
   );
 };

@@ -18,10 +18,9 @@ const Date = (props) => {
   });
 
   return (
-    <div>
-      <input value={label} onChange={handleLabelChange} />
-      <br></br>
-      <input type="date"></input>
+    <div className="element-name">
+      <h3 className="element-field-name">Date</h3>
+      <input className="element-input min-width-input" type="date"></input>
     </div>
   );
 };

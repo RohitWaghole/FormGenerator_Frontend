@@ -7,14 +7,9 @@
 
 .container-drag {
   width: 30%;
-  /* background: rgba(12, 13, 14, 0.945); */
-  /* background-color: white; */
-
   background-color: #f3f3fe;
   color: rgb(0, 0, 0);
   margin-right: 12px;
-  /* position: fixed; */
-  /* overflow: scroll; */
 }
 
 .container-right {
@@ -60,9 +55,9 @@
 }
 
 .added-elements {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   background-color: white;
-  text-align: center;
+  /* text-align: center; */
   margin: 3px;
   padding: 12px;
 }
@@ -123,4 +118,8 @@
 .publish-btn:active {
   background-color: #298e46;
   box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
+}
+
+.bg-color-white {
+  background-color: white;
 }

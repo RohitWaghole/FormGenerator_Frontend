@@ -8,19 +8,19 @@ import Email from "../Elements/Email.js";
 import LongAns from "../Elements/LongAns.js";
 import Phone from "../Elements/Phone.js";
 import Time from "../Elements/Time.js";
-import Preview from '../Preview/Preview.js'
 import "./CreateForm.css";
 import formApi from '../../API/FormData.js'
 import Navbar from "../Navbar/Navbar.js";
 
 
-export default class CreateForm extends Component {
+class CreateForm extends Component {
+
   state = {
     fields: [],
+    formName: "",
   };
 
   elements = [
-    { name: "Heading" },
     { name: "FullName" },
     { name: "Email" },
     { name: "Date" },
@@ -31,6 +31,9 @@ export default class CreateForm extends Component {
     { name: "LongAnswer" },
     //add more elements here
   ];
+
+  //array to save form configuration
+  formConfiguration = [];
 
   //count for all elements
   MCQCount = 0;
@@ -43,8 +46,6 @@ export default class CreateForm extends Component {
   PhoneCount = 0;
   TimeCount = 0;
 
-  //array to save form configuration
-  formConfiguration = [];
 
   addFormConfiguration = (field) => {
     var objIndex = this.formConfiguration.findIndex(
@@ -56,6 +57,10 @@ export default class CreateForm extends Component {
     } else {
       this.formConfiguration[objIndex] = field;
     }
+  };
+
+  addFormName = (name) => {
+    this.setState({name:name});
   };
 
   onDragStart = (ev, id) => {
@@ -87,20 +92,10 @@ export default class CreateForm extends Component {
 
     else if (ev.dataTransfer.getData("fieldID") === "Date") {
       this.setState((prevState) => ({
-        fields: [...prevState.fields, <Date id={this.DateCount} addFormConfiguration={this.addFormConfiguration}/>],
+        fields: [...prevState.fields, <Date id={this.DateCount} addFormConfiguration={this.addFormConfiguration} />],
       }
       ));
-
       this.DateCount = this.DateCount + 1;
-    } 
-    
-    else if (ev.dataTransfer.getData("fieldID") === "Heading") {
-      this.setState((prevState) => ({
-        fields: [...prevState.fields, <Heading id={this.HeadingCount} addFormConfiguration={this.addFormConfiguration}/> ],
-      }
-      ));
-
-      this.HeadingCount = this.HeadingCount + 1;
     }
 
     else if (ev.dataTransfer.getData("fieldID") === "FullName") {
@@ -167,14 +162,14 @@ export default class CreateForm extends Component {
     console.log("Fields :")
     console.log(this.formConfiguration)
 
-    const querRes = await formApi.post('/saveform', { formConf: { fromName:"formName",formID: "2", fields: this.formConfiguration }, email: this.props.email })
+    const querRes = await formApi.post('/saveform', { formConf: { fromName: this.state.name, formID: "2", fields: this.formConfiguration }, email: this.props.email })
 
     console.log(querRes.data)
   };
 
 
   handlePreview=async()=>{
-    // this.props.navigation.navigate('/preview')
+    this.props.navigate('/user/preview',{ state:this.formConfiguration })
   }
 
   render() {
@@ -195,6 +190,7 @@ export default class CreateForm extends Component {
 
     return (
       // root container
+      /*eslint no-unused-expressions: "error"*/
       <div>
         <Navbar />
         <div className="container-root1">
@@ -221,18 +217,15 @@ export default class CreateForm extends Component {
               <h2>Form Elements</h2>
             </div>
 
-            <ul>
-              {this.state.fields.map((el, index) => {
-                return (
-                  <li className="added-elements" key={index}>
-                    {el}
-                    <hr></hr>
-                  </li>
-                );
-              })}
+            <Heading addFormName={this.addFormName} />
+            <ul className="bg-color-white">
+              {
+              this.state.fields.map((el, index) => (
+                <li className="added-elements" key={index}>{el}</li>
+              ))
+              }
             </ul>
 
-            {/* Droppable Area */}
             <div
               className="droppable-area"
               onDragOver={(e) => this.onDragOver(e)}
@@ -255,6 +248,11 @@ export default class CreateForm extends Component {
           </div>
         </div>
       </div>
-    );
+
+    )
   }
 }
+
+
+export default CreateForm
+
