@@ -8,7 +8,7 @@ body{
   background-color: white;
 }
 
-.container{
+.container-left{
   background-color: #B793C2;
   width: 50%;
   height: 500px;
@@ -51,4 +51,24 @@ body{
   padding-bottom: -20px;
   padding-top: 40px;
   padding-left: 10px;
+}
+
+.container{
+  background-color: #B793C2;
+  width: 170px;
+  height: 70px;
+  float: right;
+  margin-right: 20%;
+  margin-top: -310px;
+  margin-bottom: -500px;
+  border-radius: 7px;
+
+}
+
+.createBtn{
+  margin-top: 13.5%;
+  margin-left: 14%;
+  border: none;
+  background: transparent;
+  color: white;
 }
