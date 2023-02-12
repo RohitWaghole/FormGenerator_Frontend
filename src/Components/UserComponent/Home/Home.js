@@ -29,7 +29,7 @@ const Home = (props) => {
       <div>
         <ul>
           {forms.map((form,index)=>{
-            return <li key={index}>Form {index+1} :{form.formID}</li>
+            return <li key={index}>Form {index+1} :{form.formName}</li>
           })}
         </ul>
       </div>
