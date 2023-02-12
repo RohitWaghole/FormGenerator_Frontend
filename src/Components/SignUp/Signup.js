@@ -48,39 +48,42 @@ const Signup = () => {
         <form action="" onSubmit={handleSubmit}>
           <div className="item">
             <label className="label" htmlFor="email">
-              Email&nbsp;&nbsp;&nbsp;
+              
             </label>
             <input
               className="item1 input"
               type="text"
               name="email"
               id="email"
+              placeholder="Email"
               autoComplete="off"
             ></input>
           </div>
 
           <div className="item">
             <label className="label" htmlFor="password">
-              Password&nbsp;&nbsp;&nbsp;
+              
             </label>
             <input
-              className="input"
+              className="item1 input"
               type="password"
               name="password"
               id="password"
+              placeholder="Password"
               autoComplete="off"
             ></input>
           </div>
 
           <div className="item">
             <label className="label" htmlFor="confirmPassword">
-              Confirm Password&nbsp;&nbsp;
+              
             </label>
             <input
-              className="input"
+              className="item1 input"
               type="password"
               name="confirmPassword"
               id="confirmPassword"
+              placeholder="Confirm Password"
               autoComplete="off"
             ></input>
           </div>
@@ -91,7 +94,7 @@ const Signup = () => {
         </form>
         <div className="item">
           <span>
-            Already have an account?<button onClick={() => { navigate('/') }}> Log in</button>
+            Already have an account? <button className="navigation" onClick={() => { navigate('/') }}> Log in</button>
           </span>
         </div>
       </div>
