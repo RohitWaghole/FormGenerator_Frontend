@@ -3,7 +3,6 @@ import userApi from "../API/UserData.js";
 
 const handleLogin = async (userCred) => {
 
-    console.log(userCred)
     const res = await userApi.post('/login', userCred);
     
     if(res.data.status===true){

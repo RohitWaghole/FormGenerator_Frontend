@@ -8,14 +8,13 @@ import Email from "../Elements/Email.js";
 import LongAns from "../Elements/LongAns.js";
 import Phone from "../Elements/Phone.js";
 import Time from "../Elements/Time.js";
-import Preview from '../Preview/Preview.js'
 import "./CreateForm.css";
 import formApi from '../../API/FormData.js'
 import Navbar from "../Navbar/Navbar.js";
 
 
+class CreateForm extends Component {
 
-export default class CreateForm extends Component {
   state = {
     fields: [],
     formName: "",
@@ -169,8 +168,8 @@ export default class CreateForm extends Component {
   };
 
 
-  handlePreview = async () => {
-    // this.props.navigation.navigate('/preview')
+  handlePreview=async()=>{
+    this.props.navigate('/user/preview',{ state:this.formConfiguration })
   }
 
   render() {
@@ -253,3 +252,7 @@ export default class CreateForm extends Component {
     )
   }
 }
+
+
+export default CreateForm
+
