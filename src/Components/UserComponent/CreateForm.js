@@ -13,10 +13,11 @@ import "./CreateForm.css";
 export default class CreateForm extends Component {
   state = {
     fields: [],
+    formName: "",
   };
 
   elements = [
-    { name: "Heading" },
+    // { name: "Heading" },
     { name: "FullName" },
     { name: "Email" },
     { name: "Date" },
@@ -52,6 +53,12 @@ export default class CreateForm extends Component {
     } else {
       this.formConfiguration[objIndex] = field;
     }
+  };
+
+  addFormName = (name) => {
+    this.setState((prevState) => {
+      name: name;
+    });
   };
 
   onDragStart = (ev, id) => {
@@ -96,18 +103,20 @@ export default class CreateForm extends Component {
         ],
       }));
       this.DateCount = this.DateCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "Heading") {
-      this.setState((prevState) => ({
-        fields: [
-          ...prevState.fields,
-          <Heading
-            id={this.HeadingCount}
-            addFormConfiguration={this.addFormConfiguration}
-          />,
-        ],
-      }));
-      this.HeadingCount = this.HeadingCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "FullName") {
+    }
+    // else if (ev.dataTransfer.getData("fieldID") === "Heading") {
+    //   this.setState((prevState) => ({
+    //     fields: [
+    //       ...prevState.fields,
+    //       <Heading
+    //         id={this.HeadingCount}
+    //         addFormConfiguration={this.addFormConfiguration}
+    //       />,
+    //     ],
+    //   }));
+    //   this.HeadingCount = this.HeadingCount + 1;
+    // }
+    else if (ev.dataTransfer.getData("fieldID") === "FullName") {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,
@@ -212,13 +221,12 @@ export default class CreateForm extends Component {
           <div className="task-header">
             <h2>Form Elements</h2>
           </div>
-
-          <ul>
+          <Heading />
+          <ul className="bg-color-white">
             {this.state.fields.map((el, index) => {
               return (
                 <li className="added-elements" key={index}>
                   {el}
-                  <hr></hr>
                 </li>
               );
             })}

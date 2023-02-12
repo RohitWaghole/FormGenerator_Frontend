@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const Email = (props) => {
-  const [label, setLabel] = useState("Email");
+  const [label, setLabel] = useState("");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
@@ -19,8 +19,15 @@ const Email = (props) => {
 
   return (
     <div>
-      <h3>Email</h3>
-      <input type="email" value={label} onChange={handleLabelChange} />
+      <h3 className="element-field-name">Email</h3>
+      <input
+        className="element-input element-border-style"
+        placeholder="example@example.com"
+        type="email"
+        value={label}
+        onChange={handleLabelChange}
+        size={40}
+      />
     </div>
   );
 };
