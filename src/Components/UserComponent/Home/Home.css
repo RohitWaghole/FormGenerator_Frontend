@@ -55,8 +55,8 @@ body{
 
 .container{
   background-color: #B793C2;
-  width: 170px;
-  height: 70px;
+  width: 200px;
+  height: 100px;
   float: right;
   margin-right: 20%;
   margin-top: -310px;
@@ -66,9 +66,18 @@ body{
 }
 
 .createBtn{
-  margin-top: 13.5%;
-  margin-left: 14%;
+  margin-top: 13%;
+  margin-left: 9%;
+  padding-right: 15px;
   border: none;
   background: transparent;
   color: white;
+  font-size: 19px;
+  line-height: 1.5;
+
+}
+
+.delete{
+  float: right;
+  margin-right: 10%;
 }
