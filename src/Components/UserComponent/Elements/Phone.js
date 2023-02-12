@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const Phone = (props) => {
-  const [label, setLabel] = useState("9999999999");
+  const [label, setLabel] = useState("");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
@@ -19,8 +19,13 @@ const Phone = (props) => {
 
   return (
     <div>
-      <h3>Phone</h3>
-      <input value={label} onChange={handleLabelChange} />
+      <h3 className="element-field-name">Phone</h3>
+      <input
+        className="element-input min-width-input element-border-style"
+        placeholder="9999999999"
+        value={label}
+        onChange={handleLabelChange}
+      />
     </div>
   );
 };

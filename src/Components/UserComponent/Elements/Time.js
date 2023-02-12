@@ -18,9 +18,14 @@ const Time = (props) => {
   });
 
   return (
-    <div>
-      <h3>Time</h3>
-      <input type="time" value={label} onChange={handleLabelChange} />
+    <div className="element-name">
+      <h3 className="element-field-name">Time</h3>
+      <input
+        className="element-input min-width-input time-input"
+        type="time"
+        value={label}
+        onChange={handleLabelChange}
+      />
     </div>
   );
 };

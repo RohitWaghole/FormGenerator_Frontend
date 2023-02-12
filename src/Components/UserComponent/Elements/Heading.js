@@ -1,25 +1,27 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import "./Elements.css";
 
 const Heading = (props) => {
-  const [label, setLabel] = useState("Heading");
+  const [name, setName] = useState("Untitled Form");
 
-  const handleLabelChange = (e) => {
-    setLabel(e.target.value);
+  const handleNameChange = (e) => {
+    setName(e.target.value);
   };
 
   useEffect(() => {
-    const field = {
-      id: `Heading_${props.id}`,
-      type: "heading",
-      label: label,
-    };
-    props.addFormConfiguration(field);
-  });
+    props.addFormName(name);
+  }, [name]);
 
   return (
     <div>
-      <input type="text" value={label} onChange={handleLabelChange} />
+      <input
+        className="element-input element-heading "
+        type="text"
+        onChange={handleNameChange}
+        placeholder="Heading"
+        size={37}
+      />
     </div>
   );
 };
