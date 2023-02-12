@@ -8,7 +8,6 @@ import Email from "../Elements/Email.js";
 import LongAns from "../Elements/LongAns.js";
 import Phone from "../Elements/Phone.js";
 import Time from "../Elements/Time.js";
-import Preview from '../Preview/Preview.js'
 import "./CreateForm.css";
 import formApi from '../../API/FormData.js'
 import Navbar from "../Navbar/Navbar.js";
