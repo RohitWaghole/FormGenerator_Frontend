@@ -10,5 +10,16 @@
 }
 
 .signupContainer {
-  height: 450px;
+  height: 550px;
+}
+
+.btn{
+  margin-top: 7px;
+}
+
+.input{
+  margin-top: 5px;
+  height: 45px;
+  width: 270px;
+  margin-bottom: 1px;
 }

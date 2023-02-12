@@ -48,25 +48,28 @@ const Login = (props) => {
         <form action="" onSubmit={handleSubmit}>
           <div className="item">
             <label className="label" htmlFor="email">
-              Email&nbsp;&nbsp;&nbsp;
+              
             </label>
             <input
               className="item1"
               type="text"
               name="email"
               id="email"
+              Placeholder="Email"
               autoComplete="off"
             ></input>
           </div>
 
           <div className="item">
             <label className="label" htmlFor="password">
-              Password&nbsp;&nbsp;&nbsp;
+              
             </label>
             <input
+              className="item1 item2"
               type="password"
               name="password"
               id="password"
+              Placeholder="Password"
               autoComplete="off"
             ></input>
           </div>
@@ -75,13 +78,13 @@ const Login = (props) => {
           </button>
           <div className="item">
             <span>
-              <button onClick={() => { navigate('/forgotPassword') }}>Forgot Password?</button>
+              <button className="navigation" onClick={() => { navigate('/forgotPassword') }}>Forgot Password?</button>
             </span>
           </div>
         </form>
         <div className="item">
           <span>
-            Don't have an account?<button onClick={() => { navigate('/signup') }}>Sign up</button>
+            Don't have an account? <button className="navigation" onClick={() => { navigate('/signup') }}> Sign up</button>
           </span>
         </div>
       </div>
