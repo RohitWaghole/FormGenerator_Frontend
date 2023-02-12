@@ -23,10 +23,26 @@ const Home = (props) => {
   },[])
 
   return (
+    
     <div className="home-root">
       <Navbar/>
 
       <div>
+
+      <div className="container">
+        <div className="main"><span>Created Forms</span></div>
+        <div className="subItem"><span className="boxFont">Form 1</span></div>
+        <div className="subItem"><span className="">Form 2</span></div>
+        <div className="subItem"><span className="boxFont">Form 3</span></div>
+        {/* <div className="subItem"><span className="">Form 1</span></div>
+        <div className="subItem"><span className="boxFont">Form 2</span></div>
+        <div className="subItem"><span className="">Form 3</span></div>
+        <div className="subItem"><span className="boxFont">Form 1</span></div>
+        <div className="subItem"><span className="">Form 2</span></div>
+        <div className="subItem"><span className="boxFont">Form 3</span></div> */}
+
+      </div>
+
         <ul>
           {forms.map((form,index)=>{
             return <li>Form {index+1} :{form.formID}</li>
