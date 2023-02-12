@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const ShortAns = (props) => {
-  const [label, setLabel] = useState("Type your question here");
+  const [label, setLabel] = useState("");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
@@ -18,10 +18,14 @@ const ShortAns = (props) => {
   });
 
   return (
-    <div>
-      <input value={label} onChange={handleLabelChange} />
-      <br></br>
-      <input type="text"></input>
+    <div className="element-name">
+      <input
+        className="element-input element-gap element-border-style"
+        value={label}
+        placeholder="Type your question here"
+        onChange={handleLabelChange}
+      />
+      <input className="element-input" type="text"></input>
     </div>
   );
 };

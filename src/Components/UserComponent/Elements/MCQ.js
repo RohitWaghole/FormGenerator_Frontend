@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 
 const MCQ = (props) => {
-  const [options, setOptions] = useState(["option 1"]);
-  const [label, setLabel] = useState("Type your question here");
+  const [options, setOptions] = useState(["Option 1"]);
+  const [label, setLabel] = useState("");
 
   var count = options.length;
 
   const handleAddOption = () => {
-    setOptions([...options, `option ${count + 1}`]);
+    setOptions([...options, `Option ${count + 1}`]);
   };
 
   const handleOptionChange = (e) => {
@@ -32,22 +32,36 @@ const MCQ = (props) => {
   });
 
   return (
-    <div>
-      <input value={label} onChange={handleLabelChange} />
+    <div className="element-name">
+      <input
+        className="element-input element-border-style"
+        placeholder="Type your question here"
+        value={label}
+        onChange={handleLabelChange}
+      />
 
       <div id="options">
         {options.map((op, index) => {
           return (
-            <div key={index}>
+            <div key={index} className="element-input">
               <input type="radio" value={op} name={op} />
+              <span> </span>
               <label>
-                <input value={op} id={index} onChange={handleOptionChange} />
+                <input
+                  className="element-border-style"
+                  value={op}
+                  id={index}
+                  placeholder="Enter your option"
+                  onChange={handleOptionChange}
+                />
               </label>
             </div>
           );
         })}
 
-        <button onClick={handleAddOption}>Add option</button>
+        <button className="button-60" onClick={handleAddOption}>
+          Add Option
+        </button>
       </div>
     </div>
   );
