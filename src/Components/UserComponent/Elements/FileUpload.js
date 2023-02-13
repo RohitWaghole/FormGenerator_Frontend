@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const FileUpload = (props) => {
-  const [label, setLabel] = useState("File Upload");
+  const [label, setLabel] = useState("Type your question");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
