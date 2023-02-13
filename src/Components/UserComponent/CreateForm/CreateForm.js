@@ -22,17 +22,17 @@ class CreateForm extends Component {
   };
 
   elements = [
-    { name: "FullName" },
+    { name: "Full Name" },
     { name: "Email" },
     { name: "Date" },
     { name: "Time" },
     { name: "Address" },
     { name: "Phone" },
-    { name: "MCQ" },
-    { name: "CheckboxAnswer" },
-    { name: "short_ans" },
-    { name: "LongAnswer" },
-    { name: "FileUpload" },
+    { name: "Multiple Choice Question" },
+    { name: "Checkbox Answer" },
+    { name: "Short Answer" },
+    { name: "Long Answer" },
+    { name: "File Upload" },
     //add more elements here
   ];
 
@@ -78,7 +78,7 @@ class CreateForm extends Component {
   };
 
   onDrop = (ev) => {
-    if (ev.dataTransfer.getData("fieldID") === "MCQ") {
+    if (ev.dataTransfer.getData("fieldID") === "Multiple Choice Question") {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,
@@ -90,7 +90,7 @@ class CreateForm extends Component {
       }));
 
       this.MCQCount = this.MCQCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "short_ans") {
+    } else if (ev.dataTransfer.getData("fieldID") === "Short Answer") {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,
@@ -113,7 +113,7 @@ class CreateForm extends Component {
         ],
       }));
       this.DateCount = this.DateCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "FullName") {
+    } else if (ev.dataTransfer.getData("fieldID") === "Full Name") {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,
@@ -135,7 +135,7 @@ class CreateForm extends Component {
         ],
       }));
       this.EmailCount = this.EmailCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "LongAnswer") {
+    } else if (ev.dataTransfer.getData("fieldID") === "Long Answer") {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,
@@ -168,7 +168,7 @@ class CreateForm extends Component {
         ],
       }));
       this.TimeCount = this.TimeCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "FileUpload") {
+    } else if (ev.dataTransfer.getData("fieldID") === "File Upload") {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,
@@ -190,7 +190,7 @@ class CreateForm extends Component {
         ],
       }));
       this.AddressCount = this.AddressCount + 1;
-    } else if (ev.dataTransfer.getData("fieldID") === "CheckboxAnswer") {
+    } else if (ev.dataTransfer.getData("fieldID") === "Checkbox Answer") {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,

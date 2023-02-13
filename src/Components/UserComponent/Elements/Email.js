@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const Email = (props) => {
-  const [label, setLabel] = useState("Email");
+  const [label, setLabel] = useState("Email lable here");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);

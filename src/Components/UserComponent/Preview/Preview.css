@@ -1,0 +1,32 @@
+.container-preview {
+  background-color: #f3f3fe;
+  height: 100%;
+}
+
+.preview-heading {
+  margin: 5px 0 5px 0;
+}
+
+.preview-container {
+  border: 1px solid red;
+  /* background-color: white; */
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
+.preview-elements {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-input {
+  width: 40%;
+  /* margin: auto; */
+  height: 20px;
+}
+
+.preview-label {
+  color: pink;
+  /* font-size: ; */
+}

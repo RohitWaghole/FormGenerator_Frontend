@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./Elements.css";
 
 const FullName = (props) => {
-  const [label, setLabel] = useState("Name");
+  const [label, setLabel] = useState("Name lable here");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);

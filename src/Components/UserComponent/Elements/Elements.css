@@ -4,12 +4,15 @@
 }
 
 .element-heading {
-  border: none;
+  /* border: none; */
   /* text-align: center; */
   font-weight: bold;
   padding: 10px;
   font-size: 2.4rem;
   border-radius: 5px;
+  width: 97%;
+  margin-left: 0.4%;
+  border: 1px solid black;
 }
 .element-heading:focus {
   outline: none;
