@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./Elements.css";
 
 const FullName = (props) => {
-  const [label, setLabel] = useState("");
+  const [label, setLabel] = useState("Name");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
@@ -20,13 +20,17 @@ const FullName = (props) => {
 
   return (
     <div className="element-name">
-      <h3 className="element-field-name">Name</h3>
+      <input
+        className="element-input element-gap element-border-style"
+        value={label}
+        placeholder="Name"
+        onChange={handleLabelChange}
+      />
       <input
         className="element-input element-border-style"
         placeholder="Enter your name here"
         type="text"
-        value={label}
-        onChange={handleLabelChange}
+        // onChange={handleLabelChange}
         maxLength={60}
       />
     </div>
