@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const Time = (props) => {
-  const [label, setLabel] = useState("Time");
+const Address = (props) => {
+  const [label, setLabel] = useState("Address");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
@@ -10,8 +10,8 @@ const Time = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `Time_${props.id}`,
-      type: "Time",
+      id: `Address_${props.id}`,
+      type: "Address",
       label: label,
     };
     props.addFormConfiguration(field);
@@ -22,16 +22,16 @@ const Time = (props) => {
       <input
         className="element-input element-gap element-border-style"
         value={label}
-        placeholder="Time"
+        placeholder="Address"
         onChange={handleLabelChange}
       />
       <input
-        className="element-input min-width-input time-input"
-        type="time"
-        // onChange={handleLabelChange}
-      />
+        className="element-input"
+        placeholder="Enter your address"
+        type="text"
+      ></input>
     </div>
   );
 };
 
-export default Time;
+export default Address;

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const Phone = (props) => {
-  const [label, setLabel] = useState("");
+  const [label, setLabel] = useState("Phone");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
@@ -18,13 +18,18 @@ const Phone = (props) => {
   });
 
   return (
-    <div>
-      <h3 className="element-field-name">Phone</h3>
+    <div className="element-name">
       <input
+        className="element-input element-gap element-border-style"
+        value={label}
+        placeholder="Phone Number"
+        onChange={handleLabelChange}
+      />
+      <input
+        type={"number"}
         className="element-input min-width-input element-border-style"
         placeholder="9999999999"
-        value={label}
-        onChange={handleLabelChange}
+        // onChange={handleLabelChange}
       />
     </div>
   );
