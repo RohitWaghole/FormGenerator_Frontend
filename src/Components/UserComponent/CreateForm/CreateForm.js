@@ -296,7 +296,7 @@ class CreateForm extends Component {
               </div>
 
               <div className="publish-btn-div">
-                <button className="button-4" onClick={this.handlePreview}>
+                <button className="publish-btn" onClick={this.handlePreview}>
                   Preview{" "}
                 </button>
               </div>
