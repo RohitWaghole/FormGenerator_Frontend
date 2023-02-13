@@ -24,7 +24,7 @@ const MCQ = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `Checkbox_${props.id}`,
+      id: props.id,
       type: "Checkbox",
       label: label,
       options: options,

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from '../Navbar/Navbar.js'
 import formApi from "../../API/FormData";
@@ -8,36 +8,36 @@ import "./Home.css";
 import 'font-awesome/css/font-awesome.min.css';
 
 const Home = (props) => {
-
   const [forms, setForms] = useState([]);
   const [showForm,setShowForm] = useState(false);
   const [formID,setFormID]=useState("")
-
+  
   const navigate = useNavigate();
+
+  const {email}=useParams()
 
   const getForms = async () => {
 
-    const querRes = await formApi.get('/getFormsByEmail', { params: { email: props.email } })
+    const querRes = await formApi.get('/getFormsByEmail', { params: { email:email } })
 
-    console.log(querRes.data.data)
     setForms(querRes.data.data)
   }
 
   const handleDeleteForm=async(e)=>{
-    const querRes = await formApi.delete('/deleteFormByID', { params: { email: props.email ,formID:e.target.id} })
+    const querRes = await formApi.delete('/deleteFormByID', { params: { email: email ,formID:e.target.id} })
 
-    console.log(querRes.data.massage)
+    console.log("delete form query res :",querRes.data.massage)
   }
 
 
   useEffect(() => {
     getForms();
-  }, [])
+  })
 
   return (
 
     <div className="home-root">
-      <Navbar />
+      <Navbar email={email}/>
     
       
       {!showForm ? <><div>
@@ -57,7 +57,7 @@ const Home = (props) => {
        <button className="createBtn" onClick={(e) => { 
         setShowForm(true)
         }}>Create New Form <i className="fa fa-solid fa-plus" aria-hidden="true"></i></button>
-       </div></> : <CreateForm navigate={navigate} email={props.email} formID={formID}/>}
+       </div></> : <CreateForm navigate={navigate} email={email} formID={formID}/>}
     </div >
 
   );

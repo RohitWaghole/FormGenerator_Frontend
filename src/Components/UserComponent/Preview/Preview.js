@@ -1,22 +1,24 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
 
 const Preview = (props) => {
   const location = useLocation();
+  
+  const {email}=useParams();
 
   return (
     <div>
-      <Navbar />
+      <Navbar email={email}/>
       <h2 style={{textAlign:"center", marginBottom:"20px"}}>Preview</h2>
       {
-        location.state.map((field, index) => {
+        location.state?.form.map((field, index) => {
           return (
             <div key={index} style={{marginTop:"20px", width:"100%",textAlign:"center" , margin:"auto"}}>
               <label>{field.label}</label>
               <br/>
               <br/>
-              <input type={field.type} />
+              
               <br/>
               {
                 field.options ?
@@ -28,7 +30,7 @@ const Preview = (props) => {
                             <input type="radio" value={op} name={op} />
                             <span> </span>
                             <label>
-                              <input className="element-border-style" value={op} id={index} placeholder="Enter your option" />
+                              <input readOnly className="element-border-style" value={op} id={index} placeholder="Enter your option" />
                             </label>
                             
                           </div>
@@ -37,7 +39,7 @@ const Preview = (props) => {
                     }
                     
                   </div>
-                  : <></>
+                  : <><input type={field.type} /></>
               }
               <br/>
               <hr/>

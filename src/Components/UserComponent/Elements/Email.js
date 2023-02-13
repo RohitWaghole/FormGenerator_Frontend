@@ -10,7 +10,7 @@ const Email = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `Email_${props.id}`,
+      id: props.id,
       type: "Email",
       label: label,
     };

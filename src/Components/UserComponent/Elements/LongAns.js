@@ -10,7 +10,7 @@ const LongAns = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `LongAns_${props.id}`,
+      id: props.id,
       type: "LongAns",
       label: label,
     };

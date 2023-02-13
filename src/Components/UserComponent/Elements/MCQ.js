@@ -5,10 +5,7 @@ const MCQ = (props) => {
   const [options, setOptions] = useState(props.options);
   const [label, setLabel] = useState(props.label);
 
-
-  if(props.id){
-
-  }
+  console.log("id :",props.id)
   var count = options.length;
 
   const handleAddOption = () => {

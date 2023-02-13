@@ -7,12 +7,11 @@ import Email from "../Elements/Email.js";
 import LongAns from "../Elements/LongAns.js";
 import Phone from "../Elements/Phone.js";
 import Time from "../Elements/Time.js";
-import "./CreateForm.css";
 import formApi from "../../API/FormData.js";
-import Navbar from "../Navbar/Navbar.js";
 import FileUpload from "../Elements/FileUpload.js";
 import Address from "../Elements/Address.js";
 import Checkbox from "../Elements/Checkbox.js";
+import "./CreateForm.css";
 
 class CreateForm extends Component {
   constructor(props) {
@@ -29,7 +28,6 @@ class CreateForm extends Component {
 
 
   elements = [
-    { name: "FullName" },
     { name: "Email" },
     { name: "Date" },
     { name: "Time" },
@@ -39,18 +37,29 @@ class CreateForm extends Component {
     { name: "CheckboxAnswer" },
     { name: "short_ans" },
     { name: "LongAnswer" },
-    { name: "FileUpload" },
-    //add more elements here
+    { name: "FileUpload" }
   ];
 
-  //array to save form configuration
+  MCQCount = 0;
+  ShortAnsCount = 0;
+  DateCount = 0;
+  HeadingCount = 0;
+  FullNameCount = 0;
+  EmailCount = 0;
+  LongAnsCount = 0;
+  PhoneCount = 0;
+  TimeCount = 0;
+  FileUploadCount = 0;
+  AddressCount = 0;
+  CheckBoxCount = 0;
+
 
   getFormData = async () => {
-
     if (this.props.formID) {
       const apiRes = await formApi.get('/getFormByID', { params: { formID: this.props.formID, email: this.props.email } })
-      console.log("responese :")
-      console.log(apiRes.data.data.formName)
+
+      if (apiRes.data.status === false) return alert('Something went wrong!');
+
       this.addFormName(apiRes.data.data.formName)
 
       apiRes?.data?.data?.fields.map((form) => {
@@ -65,14 +74,14 @@ class CreateForm extends Component {
           this.MCQCount = this.MCQCount + 1;
         }
 
-        else if (form.type=== "short_ans") {
+        else if (form.type === "short_ans") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
               <ShortAns id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
             ],
           }));
-    
+
           this.ShortAnsCount = this.ShortAnsCount + 1;
         }
 
@@ -84,7 +93,7 @@ class CreateForm extends Component {
               <Date id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
             ],
           }));
-    
+
           this.DateCount = this.DateCount + 1;
         }
 
@@ -95,7 +104,7 @@ class CreateForm extends Component {
               <Email id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
             ],
           }));
-    
+
           this.EmailCount = this.EmailCount + 1;
         }
 
@@ -106,7 +115,7 @@ class CreateForm extends Component {
               <LongAns id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
             ],
           }));
-    
+
           this.LongAnsCount = this.LongAnsCount + 1;
         }
 
@@ -117,19 +126,19 @@ class CreateForm extends Component {
               <Phone id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
             ],
           }));
-    
+
           this.PhoneCount = this.PhoneCount + 1;
         }
 
 
-        else if (form.type=== "Time") {
+        else if (form.type === "Time") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
               <Time id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
             ],
           }));
-    
+
           this.TimeCount = this.TimeCount + 1;
         }
 
@@ -140,7 +149,7 @@ class CreateForm extends Component {
               <Address id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
             ],
           }));
-    
+
           this.AddressCount = this.AddressCount + 1;
         }
 
@@ -152,7 +161,7 @@ class CreateForm extends Component {
               <FileUpload id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
             ],
           }));
-    
+
           this.FileUploadCount = this.FileUploadCount + 1;
         }
 
@@ -163,28 +172,13 @@ class CreateForm extends Component {
               <Checkbox id={form.id} label={form.label} options={form.options} addFormConfiguration={this.addFormConfiguration} />,
             ],
           }));
-    
+
           this.CheckBoxCount = this.CheckBoxCount + 1;
         }
-      })      
+      })
 
     }
   }
-
-
-  //count for all elements
-  MCQCount = 0;
-  ShortAnsCount = 0;
-  DateCount = 0;
-  HeadingCount = 0;
-  FullNameCount = 0;
-  EmailCount = 0;
-  LongAnsCount = 0;
-  PhoneCount = 0;
-  TimeCount = 0;
-  FileUploadCount = 0;
-  AddressCount = 0;
-  CheckBoxCount = 0;
 
   addFormConfiguration = (field) => {
     var objIndex = this.state.formConfiguration.findIndex(
@@ -197,13 +191,38 @@ class CreateForm extends Component {
       this.state.formConfiguration[objIndex] = field;
     }
 
-    
+
   };
 
   addFormName = (name) => {
     this.setState({ name: name });
   };
 
+
+
+  handlePublish = async () => {
+    console.log("Fields :");
+    console.log(this.state.formConfiguration);
+
+    const querRes = await formApi.post('/saveform', { formConf: { formID: this.props.formID, formName: this.state.name, fields: this.state.formConfiguration }, email: this.props.email })
+
+    if (querRes.data.status === true) {
+      this.props.navigate(`/${this.props.email}/publish`, { state: { formID: querRes.data.data.formID } })
+    }
+
+    else {
+      alert(querRes.data.massage)
+    }
+
+
+  };
+
+  handlePreview = async () => {
+    this.props.navigate(`/${this.props.email}/preview`, { state: { form: this.state.formConfiguration, email: this.props.email } });
+  };
+
+
+  //Drag and drop handlers
   onDragStart = (ev, id) => {
     ev.dataTransfer.setData("fieldID", id);
   };
@@ -245,7 +264,7 @@ class CreateForm extends Component {
         ],
       }));
       this.DateCount = this.DateCount + 1;
-    
+
     } else if (ev.dataTransfer.getData("fieldID") === "Email") {
       this.setState((prevState) => ({
         fields: [
@@ -317,30 +336,13 @@ class CreateForm extends Component {
         fields: [
           ...prevState.fields,
           <Checkbox
-            id={`Checkbox_${this.CheckBoxCount}`} label={""} options={['option 1']}
+            id={`Checkbox_${this.CheckBoxCount}`} label={""} options={['checkbox 1']}
             addFormConfiguration={this.addFormConfiguration}
           />,
         ],
       }));
       this.CheckBoxCount = this.CheckBoxCount + 1;
     }
-  };
-
-  handlePublish = async () => {
-    //code to handle submit
-
-    console.log("Fields :");
-    console.log(this.state.formConfiguration);
-
-    const querRes = await formApi.post('/saveform', { formConf: { formID: this.props.formID, formName: this.state.name, fields: this.state.formConfiguration }, email: this.props.email })
-
-    console.log(querRes.data)
-
-
-  };
-
-  handlePreview = async () => {
-    this.props.navigate("/user/preview", { state: this.state.formConfiguration });
   };
 
   render() {
@@ -361,9 +363,7 @@ class CreateForm extends Component {
 
     return (
       <div>
-        {/* <Navbar /> */}
         <div className="container-root1">
-          {/* left container */}
           <div className="container-drag">
             <div className="task-header">
               <h2>All Elements</h2>
@@ -389,8 +389,8 @@ class CreateForm extends Component {
 
             <ul>
               {
-                this.state.fields.map((el,index)=>{
-                  return <li className="added-elements" style={{marginBottom:"20px"}} key={index}>{el}</li>
+                this.state.fields.map((el, index) => {
+                  return <li className="added-elements" style={{ marginBottom: "20px" }} key={index}>{el}</li>
                 })
               }
             </ul>

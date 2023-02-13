@@ -10,7 +10,7 @@ const ShortAns = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `ShortAns_${props.id}`,
+      id: props.id,
       type: "short_ans",
       label: label,
     };
