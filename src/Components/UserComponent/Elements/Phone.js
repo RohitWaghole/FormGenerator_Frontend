@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const Phone = (props) => {
-  const [label, setLabel] = useState("Phone");
+  const [label, setLabel] = useState(props.label);
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);

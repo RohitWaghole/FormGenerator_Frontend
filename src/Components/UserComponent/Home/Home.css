@@ -54,11 +54,11 @@
 .container{
   background-color: #B793C2;
   width: 200px;
-  height: 100px;
+  /* height: 100px; */
   float: right;
   margin-right: 20%;
-  margin-top: -310px;
-  margin-bottom: -500px;
+  margin-top: -15%;
+  /* margin-bottom: -500px; */
   border-radius: 7px;
 
 }

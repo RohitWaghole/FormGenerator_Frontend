@@ -2,9 +2,13 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 
 const MCQ = (props) => {
-  const [options, setOptions] = useState(["Option 1"]);
-  const [label, setLabel] = useState("Type your question here");
+  const [options, setOptions] = useState(props.options);
+  const [label, setLabel] = useState(props.label);
 
+
+  if(props.id){
+
+  }
   var count = options.length;
 
   const handleAddOption = () => {
@@ -23,7 +27,7 @@ const MCQ = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `MCQ_${props.id}`,
+      id: props.id,
       type: "MCQ",
       label: label,
       options: options,

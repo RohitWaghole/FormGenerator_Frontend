@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const LongAns = (props) => {
-  const [label, setLabel] = useState("Type your question here");
+  const [label, setLabel] = useState(props.label);
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
