@@ -8,6 +8,7 @@ import Wrapper from "./UserComponent/Wrapper.js";
 import AboutUs from "./UserComponent/AboutUs/AboutUs.js";
 import Publish from "./UserComponent/Publish/Publish";
 import UserEnd from "./UserEnd/UserEnd";
+import Response from "./UserComponent/Response/Response";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -28,6 +29,7 @@ function App() {
           <Route element={<AboutUs/>} path="/:email/about"/>
           <Route element={<Publish/>} path="/:email/publish"/>
           <Route element={<UserEnd/>} path="/userend/:id"/>
+          <Route element={<Response/>} path="/:email/:id/responses"/>
         </Routes>
       </Router>
     </div>
