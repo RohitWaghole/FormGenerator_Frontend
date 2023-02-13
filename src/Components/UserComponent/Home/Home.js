@@ -20,10 +20,10 @@ const Home = (props) => {
 
   const getForms = async () => {
 
-    const querRes = await formApi.get('/getFormsByEmail', { params: { email: props.email } })
+    // const querRes = await formApi.get('/getFormsByEmail', { params: { email: props.email } })
 
-    console.log(querRes.data.data)
-    setForms(querRes.data.data)
+    // console.log(querRes.data.data)
+    // setForms(querRes.data.data)
   }
   useEffect(() => {
     getForms();

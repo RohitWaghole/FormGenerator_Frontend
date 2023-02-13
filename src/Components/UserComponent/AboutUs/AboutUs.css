@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+ 
+.info{
+    background-color: #B793C2;
+    border-radius: 7px;
+    width: 600px;
+    height: 530px;
+    margin-top: 100px;
+    margin-left: 80px;
+}
+
+.aboutHead{
+    padding-top: 15px;
+    color: #ffffcc;
+    text-align: center;
+    
+}
+
+.aboutPara{
+    margin-top: 10px;
+    margin-left: 15px;
+    color: #e6ffcc;
+    font-size: 19px;
+    line-height: 1.49;
+}
