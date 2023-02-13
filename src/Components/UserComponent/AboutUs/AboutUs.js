@@ -24,7 +24,7 @@ const AboutUs = (props) => {
     </div>
 
     <div>
-        <img src=""
+        <img src=""/>
     </div>
     </div>
     
