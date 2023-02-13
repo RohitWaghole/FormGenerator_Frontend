@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import "./Elements.css";
 
 const Heading = (props) => {
-  const [name, setName] = useState("Untitled Form");
+  const [name, setName] = useState(props.name);
 
+  console.log(props.name)
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -18,6 +19,7 @@ const Heading = (props) => {
       <input
         className="element-input element-heading "
         type="text"
+        value={name}
         onChange={handleNameChange}
         placeholder="Heading"
         size={37}

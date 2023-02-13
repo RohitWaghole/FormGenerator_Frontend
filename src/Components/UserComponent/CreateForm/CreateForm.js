@@ -19,7 +19,7 @@ class CreateForm extends Component {
     super(props);
     this.state = {
       fields: [],
-      formName: "",
+      name: "",
       formConfiguration: []
 
     };
@@ -50,9 +50,10 @@ class CreateForm extends Component {
     if (this.props.formID) {
       const apiRes = await formApi.get('/getFormByID', { params: { formID: this.props.formID, email: this.props.email } })
       console.log("responese :")
-      console.log(apiRes.data.data)
+      console.log(apiRes.data.data.formName)
+      this.addFormName(apiRes.data.data.formName)
 
-      apiRes?.data?.data?.map((form) => {
+      apiRes?.data?.data?.fields.map((form) => {
         if (form.type === 'MCQ') {
           this.setState((prevState) => ({
             fields: [
@@ -165,7 +166,7 @@ class CreateForm extends Component {
     
           this.CheckBoxCount = this.CheckBoxCount + 1;
         }
-      })
+      })      
 
     }
   }
@@ -384,7 +385,7 @@ class CreateForm extends Component {
             <div className="task-header">
               <h2>Form</h2>
             </div>
-            <Heading addFormName={this.addFormName} />
+            <Heading name={this.state.name} addFormName={this.addFormName} />
 
             <ul>
               {

@@ -55,11 +55,15 @@
   background-color: #B793C2;
   width: 200px;
   /* height: 100px; */
-  float: right;
-  margin-right: 20%;
-  margin-top: -15%;
+  /* float: right; */
+  position: fixed;
+  /* margin-right: 20%;
+  margin-top: -10%; */
   /* margin-bottom: -500px; */
   border-radius: 7px;
+
+  top:20%;
+  right: 200px;
 
 }
 
