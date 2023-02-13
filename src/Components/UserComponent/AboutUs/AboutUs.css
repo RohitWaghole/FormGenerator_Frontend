@@ -7,23 +7,33 @@
 .info{
     background-color: #B793C2;
     border-radius: 7px;
-    width: 600px;
-    height: 530px;
+    width: 720px;
+    height: 550px;
     margin-top: 100px;
-    margin-left: 80px;
+    margin-left: 100px;
 }
 
 .aboutHead{
     padding-top: 15px;
-    color: #ffffcc;
+    color: #000000;
     text-align: center;
+    margin-bottom: 17px;
     
 }
 
 .aboutPara{
     margin-top: 10px;
     margin-left: 15px;
+    margin-right: 12px;
     color: #e6ffcc;
     font-size: 19px;
     line-height: 1.49;
+    text-align: left;
+}
+
+.AboutImg{
+    float: right;
+    margin-top: -34%;
+    margin-right: -3%;
+    width: 900px;
 }

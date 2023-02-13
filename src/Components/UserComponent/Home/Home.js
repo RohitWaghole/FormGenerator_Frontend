@@ -34,6 +34,7 @@ const Home = (props) => {
           <div className="subItem"><span className="boxFont">Form 1 <i className="fa fa-trash delete" aria-hidden="true"></i></span></div>
           <div className="subItem"><span className="">Form 2 <i className="fa fa-trash delete" aria-hidden="true"></i></span></div>
           <div className="subItem"><span className="boxFont">Form 3 <i className="fa fa-trash delete" aria-hidden="true"></i></span></div>
+          
         </div>
 
         

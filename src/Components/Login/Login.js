@@ -16,7 +16,7 @@ const Login = (props) => {
 
     //validation
     if (email === '' || password === '' || email === null || password === null) {
-      alert("All detals are mandatory !")
+      alert("All detals are mandatory !") 
     }
 
     else {
@@ -33,7 +33,8 @@ const Login = (props) => {
         navigate('/user/home') 
       }
       else {
-        alert("Invali Detils!")
+
+       alert("Invalid Details!") 
       }
     }
   };
