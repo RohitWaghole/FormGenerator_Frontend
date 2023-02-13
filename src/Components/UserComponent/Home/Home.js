@@ -37,10 +37,10 @@ const Home = (props) => {
       
       {!showForm ? <><div>
         <div className="container-left">
-          <div className="main"><span>Created Forms</span></div>          
+          <div className="main" style={{marginBottom:"20px"}}><span>Created Forms</span></div>          
           {
           forms?.map((form,index)=>{
-            return <div className="subItem" key={index} ><span id={form.formID} onClick={(e)=>{
+            return <div className="subItem" key={index} style={{marginBottom:"20px"}} ><span id={form.formID} onClick={(e)=>{
               setFormID(e.target.id)
               setShowForm(true);
             }
@@ -48,7 +48,7 @@ const Home = (props) => {
           })}
         </div>
       </div >
-      <div className="container">
+      <div className="container" >
        <button className="createBtn" onClick={(e) => { 
         setShowForm(true)
         }}>Create New Form <i className="fa fa-solid fa-plus" aria-hidden="true"></i></button>

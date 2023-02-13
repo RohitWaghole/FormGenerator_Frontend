@@ -11,7 +11,7 @@ body{
 .container-left{
   background-color: #B793C2;
   width: 50%;
-  height: 500px;
+  height: auto;
   margin: 40px 20px;
   border-radius: 7px;
   display: grid;

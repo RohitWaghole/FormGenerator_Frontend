@@ -9,6 +9,7 @@
   font-weight: bold;
   padding: 10px;
   font-size: 2.4rem;
+  border-radius: 5px;
 }
 .element-heading:focus {
   outline: none;
@@ -28,7 +29,6 @@
 .min-width-input {
   width: 200px;
 }
-
 
 .time-input {
   font-size: 1.2rem;

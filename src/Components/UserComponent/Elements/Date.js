@@ -19,7 +19,12 @@ const Date = (props) => {
 
   return (
     <div className="element-name">
-      <h3 className="element-field-name">Date</h3>
+      <input
+        className="element-input element-gap element-border-style"
+        value={label}
+        placeholder="Date"
+        onChange={handleLabelChange}
+      />
       <input className="element-input min-width-input" type="date"></input>
     </div>
   );
