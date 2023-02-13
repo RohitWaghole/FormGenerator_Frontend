@@ -26,11 +26,9 @@ const Phone = (props) => {
         onChange={handleLabelChange}
       />
       <input
-        type={"tel"}
+        type={"number"}
         className="element-input min-width-input element-border-style"
         placeholder="9999999999"
-        pattern="[0-9]{10}"
-        required
         // onChange={handleLabelChange}
       />
     </div>
