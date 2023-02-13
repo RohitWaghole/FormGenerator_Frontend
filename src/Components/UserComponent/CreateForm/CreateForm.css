@@ -70,6 +70,7 @@
   /* text-align: center; */
   margin: 3px;
   padding: 12px;
+  border-radius: 5px;
 }
 
 .publish-btn-div {
@@ -130,9 +131,9 @@
   box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
 }
 
-.bg-color-white {
+/* .bg-color-white {
   background-color: white;
-}
+} */
 
 .button-4 {
   appearance: none;

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 
 const MCQ = (props) => {
-  const [options, setOptions] = useState(["Option 1"]);
+  const [options, setOptions] = useState(["Checkbox 1"]);
   const [label, setLabel] = useState("Type your question here");
 
   var count = options.length;
