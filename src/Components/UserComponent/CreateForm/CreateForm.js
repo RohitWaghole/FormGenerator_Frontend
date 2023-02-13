@@ -161,8 +161,11 @@ class CreateForm extends Component {
 
     console.log("Fields :")
     console.log(this.formConfiguration)
+    console.log(this.props.formID)
+    console.log(this.props.email)
+    console.log(this.state.name)
 
-    const querRes = await formApi.post('/saveform', { formConf: { fromName: this.state.name, formID: "2", fields: this.formConfiguration }, email: this.props.email })
+    const querRes = await formApi.post('/saveform', { formConf: { formID: this.props.formID,formName: this.state.name, fields: this.formConfiguration }, email: this.props.email})
 
     console.log(querRes.data)
   };
@@ -189,10 +192,8 @@ class CreateForm extends Component {
     });
 
     return (
-      // root container
-      /*eslint no-unused-expressions: "error"*/
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="container-root1">
           {/* left container */}
           <div className="container-drag">

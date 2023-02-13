@@ -3,7 +3,6 @@ import Navbar from "../Navbar/Navbar";
 
 const Preview=(props)=>{
   const location=useLocation();
-
     return(
         <div>
           <Navbar/>

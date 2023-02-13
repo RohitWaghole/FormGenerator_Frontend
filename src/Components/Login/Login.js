@@ -56,7 +56,7 @@ const Login = (props) => {
               type="text"
               name="email"
               id="email"
-              Placeholder="Email"
+              placeholder="Email"
               autoComplete="off"
             ></input>
           </div>
@@ -70,7 +70,7 @@ const Login = (props) => {
               type="password"
               name="password"
               id="password"
-              Placeholder="Password"
+              placeholder="Password"
               autoComplete="off"
             ></input>
           </div>

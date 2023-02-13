@@ -4,10 +4,17 @@ import { useState, useEffect } from "react";
 import "./Home.css";
 import Navbar from '../Navbar/Navbar.js'
 import formApi from "../../API/FormData";
-import '../../../../node_modules/font-awesome/css/font-awesome.min.css';
+// import '../../../../node_modules/font-awesome/css/font-awesome.min.css';
+import 'font-awesome/css/font-awesome.min.css';
+import CreateForm from "../CreateForm/CreateForm";
+import Email from "../Elements/Email";
+
 const Home = (props) => {
 
   const [forms, setForms] = useState([]);
+  const [showForm,setShowForm] = useState(false);
+  // var formID="";
+  const [formID,setFormID]=useState("")
 
   const navigate = useNavigate();
 
@@ -28,25 +35,24 @@ const Home = (props) => {
       <Navbar />
     
       
-      <div>
+      {!showForm ? <><div>
         <div className="container-left">
-          <div className="main"><span>Created Forms</span></div>
-          <div className="subItem"><span className="boxFont">Form 1 <i className="fa fa-trash delete" aria-hidden="true"></i></span></div>
-          <div className="subItem"><span className="">Form 2 <i className="fa fa-trash delete" aria-hidden="true"></i></span></div>
-          <div className="subItem"><span className="boxFont">Form 3 <i className="fa fa-trash delete" aria-hidden="true"></i></span></div>
-        </div>
-
-        
-
-      <ul>
-          {forms.map((form,index)=>{
-            return <li key={index}>Form {index+1} :{form.formName}</li>
+          <div className="main"><span>Created Forms</span></div>          
+          {
+          forms?.map((form,index)=>{
+            return <div className="subItem" key={index} ><span id={form.formID} onClick={(e)=>{
+              setFormID(e.target.id)
+              setShowForm(true);
+            }
+          } className="boxFont">{form.formName}<i className="fa fa-trash delete" aria-hidden="true"></i></span></div>
           })}
-        </ul>
+        </div>
       </div >
       <div className="container">
-       <button className="createBtn" onClick={() => { navigate('/user/createNew', { state: { navigate: navigate } }) }}>Create New Form <i className="fa fa-solid fa-plus" aria-hidden="true"></i></button>
-       </div>
+       <button className="createBtn" onClick={(e) => { 
+        setShowForm(true)
+        }}>Create New Form <i className="fa fa-solid fa-plus" aria-hidden="true"></i></button>
+       </div></> : <CreateForm navigate={navigate} email={props.email} formID={formID}/>}
     </div >
 
 
