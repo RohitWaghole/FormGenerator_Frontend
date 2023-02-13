@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const Time = (props) => {
-  const [label, setLabel] = useState("Time");
+const FileUpload = (props) => {
+  const [label, setLabel] = useState("File Upload");
 
   const handleLabelChange = (e) => {
     setLabel(e.target.value);
@@ -10,8 +10,8 @@ const Time = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `Time_${props.id}`,
-      type: "Time",
+      id: `FileUpload_${props.id}`,
+      type: "FileUpload",
       label: label,
     };
     props.addFormConfiguration(field);
@@ -22,16 +22,12 @@ const Time = (props) => {
       <input
         className="element-input element-gap element-border-style"
         value={label}
-        placeholder="Time"
+        placeholder="File"
         onChange={handleLabelChange}
       />
-      <input
-        className="element-input min-width-input time-input"
-        type="time"
-        // onChange={handleLabelChange}
-      />
+      <input className="element-input min-width-input" type="file"></input>
     </div>
   );
 };
 
-export default Time;
+export default FileUpload;

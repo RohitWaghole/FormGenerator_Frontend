@@ -9,12 +9,13 @@ import LongAns from "../Elements/LongAns.js";
 import Phone from "../Elements/Phone.js";
 import Time from "../Elements/Time.js";
 import "./CreateForm.css";
-import formApi from '../../API/FormData.js'
+import formApi from "../../API/FormData.js";
 import Navbar from "../Navbar/Navbar.js";
-
+import FileUpload from "../Elements/FileUpload.js";
+import Address from "../Elements/Address.js";
+import Checkbox from "../Elements/Checkbox.js";
 
 class CreateForm extends Component {
-
   state = {
     fields: [],
     formName: "",
@@ -25,10 +26,13 @@ class CreateForm extends Component {
     { name: "Email" },
     { name: "Date" },
     { name: "Time" },
+    { name: "Address" },
     { name: "Phone" },
     { name: "MCQ" },
+    { name: "CheckboxAnswer" },
     { name: "short_ans" },
     { name: "LongAnswer" },
+    { name: "FileUpload" },
     //add more elements here
   ];
 
@@ -45,7 +49,9 @@ class CreateForm extends Component {
   LongAnsCount = 0;
   PhoneCount = 0;
   TimeCount = 0;
-
+  FileUploadCount = 0;
+  AddressCount = 0;
+  CheckBoxCount = 0;
 
   addFormConfiguration = (field) => {
     var objIndex = this.formConfiguration.findIndex(
@@ -60,7 +66,7 @@ class CreateForm extends Component {
   };
 
   addFormName = (name) => {
-    this.setState({name:name});
+    this.setState({ name: name });
   };
 
   onDragStart = (ev, id) => {
@@ -74,31 +80,40 @@ class CreateForm extends Component {
   onDrop = (ev) => {
     if (ev.dataTransfer.getData("fieldID") === "MCQ") {
       this.setState((prevState) => ({
-        fields: [...prevState.fields, <MCQ id={this.MCQCount} addFormConfiguration={this.addFormConfiguration} />],
-      }
-      ));
+        fields: [
+          ...prevState.fields,
+          <MCQ
+            id={this.MCQCount}
+            addFormConfiguration={this.addFormConfiguration}
+          />,
+        ],
+      }));
 
       this.MCQCount = this.MCQCount + 1;
-    }
-
-    else if (ev.dataTransfer.getData("fieldID") === "short_ans") {
+    } else if (ev.dataTransfer.getData("fieldID") === "short_ans") {
       this.setState((prevState) => ({
-        fields: [...prevState.fields, <ShortAns id={this.ShortAnsCount} addFormConfiguration={this.addFormConfiguration} />],
-      }
-      ));
+        fields: [
+          ...prevState.fields,
+          <ShortAns
+            id={this.ShortAnsCount}
+            addFormConfiguration={this.addFormConfiguration}
+          />,
+        ],
+      }));
 
       this.ShortAnsCount = this.ShortAnsCount + 1;
-    }
-
-    else if (ev.dataTransfer.getData("fieldID") === "Date") {
+    } else if (ev.dataTransfer.getData("fieldID") === "Date") {
       this.setState((prevState) => ({
-        fields: [...prevState.fields, <Date id={this.DateCount} addFormConfiguration={this.addFormConfiguration} />],
-      }
-      ));
+        fields: [
+          ...prevState.fields,
+          <Date
+            id={this.DateCount}
+            addFormConfiguration={this.addFormConfiguration}
+          />,
+        ],
+      }));
       this.DateCount = this.DateCount + 1;
-    }
-
-    else if (ev.dataTransfer.getData("fieldID") === "FullName") {
+    } else if (ev.dataTransfer.getData("fieldID") === "FullName") {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,
@@ -153,24 +168,63 @@ class CreateForm extends Component {
         ],
       }));
       this.TimeCount = this.TimeCount + 1;
+    } else if (ev.dataTransfer.getData("fieldID") === "FileUpload") {
+      this.setState((prevState) => ({
+        fields: [
+          ...prevState.fields,
+          <FileUpload
+            id={this.FileUploadCount}
+            addFormConfiguration={this.addFormConfiguration}
+          />,
+        ],
+      }));
+      this.FileUploadCount = this.FileUploadCount + 1;
+    } else if (ev.dataTransfer.getData("fieldID") === "Address") {
+      this.setState((prevState) => ({
+        fields: [
+          ...prevState.fields,
+          <Address
+            id={this.AddressCount}
+            addFormConfiguration={this.addFormConfiguration}
+          />,
+        ],
+      }));
+      this.AddressCount = this.AddressCount + 1;
+    } else if (ev.dataTransfer.getData("fieldID") === "CheckboxAnswer") {
+      this.setState((prevState) => ({
+        fields: [
+          ...prevState.fields,
+          <Checkbox
+            id={this.CheckBoxCount}
+            addFormConfiguration={this.addFormConfiguration}
+          />,
+        ],
+      }));
+      this.CheckBoxCount = this.CheckBoxCount + 1;
     }
   };
 
   handlePublish = async () => {
     //code to handle submit
 
-    console.log("Fields :")
-    console.log(this.formConfiguration)
+    console.log("Fields :");
+    console.log(this.formConfiguration);
 
-    const querRes = await formApi.post('/saveform', { formConf: { fromName: this.state.name, formID: "2", fields: this.formConfiguration }, email: this.props.email })
+    const querRes = await formApi.post("/saveform", {
+      formConf: {
+        fromName: this.state.name,
+        formID: "2",
+        fields: this.formConfiguration,
+      },
+      email: this.props.email,
+    });
 
-    console.log(querRes.data)
+    console.log(querRes.data);
   };
 
-
-  handlePreview=async()=>{
-    this.props.navigate('/user/preview',{ state:this.formConfiguration })
-  }
+  handlePreview = async () => {
+    this.props.navigate("/user/preview", { state: this.formConfiguration });
+  };
 
   render() {
     var allElements = [];
@@ -219,11 +273,11 @@ class CreateForm extends Component {
 
             <Heading addFormName={this.addFormName} />
             <ul className="bg-color-white">
-              {
-              this.state.fields.map((el, index) => (
-                <li className="added-elements" key={index}>{el}</li>
-              ))
-              }
+              {this.state.fields.map((el, index) => (
+                <li className="added-elements" key={index}>
+                  {el}
+                </li>
+              ))}
             </ul>
 
             <div
@@ -234,25 +288,24 @@ class CreateForm extends Component {
             >
               <div className="drag-text">Drag Here</div>
             </div>
-            <div className="publish-btn-div">
-              <button className="publish-btn" onClick={this.handlePublish}>
-                Publish{" "}
-              </button>
-            </div>
+            <div className="publish-preview-btn">
+              <div className="publish-btn-div">
+                <button className="publish-btn" onClick={this.handlePublish}>
+                  Publish{" "}
+                </button>
+              </div>
 
-            <div className="publish-btn-div">
-              <button className="publish-btn" onClick={this.handlePreview}>
-                Preview{" "}
-              </button>
+              <div className="publish-btn-div">
+                <button className="button-4" onClick={this.handlePreview}>
+                  Preview{" "}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-    )
+    );
   }
 }
 
-
-export default CreateForm
-
+export default CreateForm;

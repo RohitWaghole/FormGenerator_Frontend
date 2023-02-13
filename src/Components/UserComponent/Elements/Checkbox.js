@@ -8,7 +8,7 @@ const MCQ = (props) => {
   var count = options.length;
 
   const handleAddOption = () => {
-    setOptions([...options, `Option ${count + 1}`]);
+    setOptions([...options, `Checkbox ${count + 1}`]);
   };
 
   const handleOptionChange = (e) => {
@@ -23,8 +23,8 @@ const MCQ = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `MCQ_${props.id}`,
-      type: "MCQ",
+      id: `Checkbox_${props.id}`,
+      type: "Checkbox",
       label: label,
       options: options,
     };
@@ -44,7 +44,7 @@ const MCQ = (props) => {
         {options.map((op, index) => {
           return (
             <div key={index} className="element-input">
-              <input type="radio" value={op} name={op} />
+              <input type="checkbox" value={op} name={op} />
               <span> </span>
               <label>
                 <input
