@@ -268,7 +268,7 @@ class CreateForm extends Component {
           {/* right container */}
           <div className="container-right" id="container-right">
             <div className="task-header">
-              <h2>Form Elements</h2>
+              <h2>Form</h2>
             </div>
 
             <Heading addFormName={this.addFormName} />
