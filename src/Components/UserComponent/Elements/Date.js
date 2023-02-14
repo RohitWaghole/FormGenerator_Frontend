@@ -10,7 +10,7 @@ const Date = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `Date_${props.id}`,
+      id: props.id,
       type: "date",
       label: label,
     };

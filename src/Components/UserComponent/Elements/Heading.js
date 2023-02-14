@@ -5,7 +5,6 @@ import "./Elements.css";
 const Heading = (props) => {
   const [name, setName] = useState(props.name);
 
-  console.log(props.name)
   const handleNameChange = (e) => {
     setName(e.target.value);
   };

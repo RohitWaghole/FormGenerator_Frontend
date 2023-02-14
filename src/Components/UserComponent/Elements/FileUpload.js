@@ -10,7 +10,7 @@ const FileUpload = (props) => {
 
   useEffect(() => {
     const field = {
-      id: `FileUpload_${props.id}`,
+      id: props.id,
       type: "FileUpload",
       label: label,
     };

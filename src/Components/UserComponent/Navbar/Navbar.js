@@ -1,11 +1,13 @@
 import React from "react";
 import "./Navbar.css";
 import handleLogout from '../../Auth/HandleLogout.js';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Navbar = (props) => {
 
   const navigate=useNavigate();
+
+  const {email}=useParams()
   return (
     <div className="navbar-root">
       <nav className="navbar">
@@ -19,17 +21,17 @@ const Navbar = (props) => {
           </div>
           <div className="menu">
             <li className="item">
-              <a className="navigate" onClick={()=>{navigate('/user/home')}} onMouseOver={(event)=>{event.target.style.cursor='pointer'}}>
+              <a className="navigate" onClick={()=>{navigate(`/${email}/home`)}} onMouseOver={(event)=>{event.target.style.cursor='pointer'}}>
                 Home
               </a>
             </li>
             <li className="item">
-              <a className="navigate" onClick={()=>{navigate('/user/about')}} onMouseOver={(event)=>{event.target.style.cursor='pointer'}}>
+              <a className="navigate" onClick={()=>{navigate(`/${email}/about`)}} onMouseOver={(event)=>{event.target.style.cursor='pointer'}}>
                 About Us
               </a>
             </li>
             <li className="item">
-              <span className="navigate" onClick={()=>{navigate('/user/profile')}} onMouseOver={(event)=>{event.target.style.cursor='pointer'}}>
+              <span className="navigate" onClick={()=>{navigate(`/${email}/profile`)}} onMouseOver={(event)=>{event.target.style.cursor='pointer'}}>
                 User
               </span>
             </li>

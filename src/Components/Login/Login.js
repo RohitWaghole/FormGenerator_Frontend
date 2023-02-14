@@ -30,7 +30,7 @@ const Login = (props) => {
       if (accessFlag === true) {
         //navigate to User Home Page
         props.getEmail(email)
-        navigate('/user/home') 
+        navigate(`/${email}/home`,{state:{email:email}}) 
       }
       else {
 
