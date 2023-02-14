@@ -62,7 +62,7 @@ class CreateForm extends Component {
 
       this.addFormName(apiRes.data.data.formName)
 
-      apiRes?.data?.data?.fields.map((form) => {
+      apiRes.data.data.fields.map((form) => {
         if (form.type === 'MCQ') {
           this.setState((prevState) => ({
             fields: [

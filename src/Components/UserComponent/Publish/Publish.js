@@ -1,3 +1,4 @@
+import React from 'react'
 import Navbar from "../Navbar/Navbar";
 import { useLocation,useParams } from "react-router-dom";
 
