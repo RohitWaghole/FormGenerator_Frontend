@@ -37,3 +37,65 @@
     margin-right: -3%;
     width: 900px;
 }
+
+.containerGrid{
+    background-color: #B793C2;
+    border-radius: 7px;
+    width: 400px;
+    height: 500px;
+    position: fixed;
+    right: 13%;
+    top: 24%;
+    display: grid;
+    grid-template-columns: 370px;
+    grid-template-rows: 5px 150px 80px 80px 80px 80px;
+
+
+}
+
+.gridElement{
+    background-color: white;
+    margin-top: 10px;
+    margin-left: 30px;
+    border-radius: 10px;
+    padding-top: 22px;
+}
+
+.element1{
+    margin-top: 70px;
+}
+
+.elementForm{
+    padding-top: 40px;
+    margin-left: 13px;
+}
+
+.elementSubmit{
+    background-color: #B793C2;
+    margin-left: 73px;
+    margin-right: 50px;
+    padding-top: 15px;
+    padding-left: 5px;
+    margin-top: 20px;
+    border-color: white;
+    border-style: solid;
+    border-radius: 17px;
+}
+
+.gridGenerator{
+    margin-left: 125px;
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+hr{
+    width: 300px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.submitBtn{
+    margin-left: 77px;
+    padding-top: 80px;
+    
+}

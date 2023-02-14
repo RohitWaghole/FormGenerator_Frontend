@@ -24,8 +24,15 @@ const AboutUs = (props) => {
     Thank you for choosing Form Generator Website. If you have any questions or feedback, please don't hesitate to reach out to us. We're always here to help. </p>
     </div>
 
-    <div>
-        <img src={aboutUsImg} alt="Form Image" className="AboutImg"/>
+    <div className="containerGrid">
+        <div className="gridGenerator">Form Generator </div>
+
+        <div className="gridElement element1"><span className="elementForm">Heading <hr /></span></div>
+        <div className="gridElement"><span className="elementForm">Name <hr /></span></div>
+        <div className="gridElement"><span className="elementForm">Email <hr /></span></div>
+        <div className="gridElement"><span className="elementForm">Date of Birth <hr /></span></div>
+        <div className="elementSubmit"><span className="submitBtn">Submit</span></div>
+
     </div>
     </div>
     
