@@ -31,11 +31,6 @@ const Navbar = (props) => {
               </a>
             </li>
             <li className="item">
-              <span className="navigate" onClick={()=>{navigate(`/${email}/profile`)}} onMouseOver={(event)=>{event.target.style.cursor='pointer'}}>
-                User
-              </span>
-            </li>
-            <li className="item">
               <a className="navigate" onMouseOver={(event)=>{event.target.style.cursor='pointer'}} onClick={async()=>{
                 const flag=await handleLogout(props.email); 
                 if(flag===true) navigate('/')

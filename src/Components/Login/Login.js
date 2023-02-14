@@ -2,7 +2,6 @@ import React from "react";
 import "./Login.css";
 import handleLogin from "../Auth/HandleLogin";
 import { useNavigate } from "react-router-dom";
-import Email from "../UserComponent/Elements/Email";
 
 
 const Login = (props) => {
@@ -16,7 +15,7 @@ const Login = (props) => {
 
     //validation
     if (email === '' || password === '' || email === null || password === null) {
-      alert("All detals are mandatory !")
+      alert("All detals are mandatory !") 
     }
 
     else {
@@ -33,7 +32,8 @@ const Login = (props) => {
         navigate(`/${email}/home`,{state:{email:email}}) 
       }
       else {
-        alert("Invali Detils!")
+
+       alert("Invalid Details!") 
       }
     }
   };
@@ -85,7 +85,7 @@ const Login = (props) => {
         </form>
         <div className="item">
           <span>
-            Don't have an account? <button className="navigation" onClick={() => { navigate('/signup',{email:Email}) }}> Sign up</button>
+            Don't have an account? <button className="navigation" onClick={() => { navigate('/signup') }}> Sign up</button>
           </span>
         </div>
       </div>

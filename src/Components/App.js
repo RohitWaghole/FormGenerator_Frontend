@@ -1,15 +1,16 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import env from 'react-dotenv'
 import Login from "./Login/Login";
 import Signup from "./SignUp/Signup";
-import Home from "./UserComponent/Home/Home.js";
-import Preview from "./UserComponent/Preview/Preview.js";
-import Wrapper from "./UserComponent/Wrapper.js";
-import AboutUs from "./UserComponent/AboutUs/AboutUs.js";
-import Publish from "./UserComponent/Publish/Publish";
-import UserEnd from "./UserEnd/UserEnd";
-import Response from "./UserComponent/Response/Response";
+import Home from "./CreatorComponents/Home/Home.js";
+import Preview from "./CreatorComponents/Preview/Preview.js";
+import AboutUs from "./CreatorComponents/AboutUs/AboutUs.js";
+import Publish from "./CreatorComponents/Publish/Publish";
+import UserEnd from "./UserComponents/UserEnd";
+import Response from "./CreatorComponents/Response/Response";
+import CreateForm from './CreatorComponents/CreateForm/CreateForm';
 
 function App() {
   const [email, setEmail] = useState("");
@@ -25,7 +26,7 @@ function App() {
           <Route element={<Login getEmail={getEmail} />} path="/" />
           <Route element={<Signup />} path="/signup" />
           <Route index element={<Home email={email} />} path="/:email/home" />
-          <Route element={<Wrapper email={email} />} path="/user/edit" />
+          <Route element={<CreateForm email={email} />} path="/:email/edit" />
           <Route element={<Preview/>} path="/:email/preview"/>
           <Route element={<AboutUs/>} path="/:email/about"/>
           <Route element={<Publish/>} path="/:email/publish"/>

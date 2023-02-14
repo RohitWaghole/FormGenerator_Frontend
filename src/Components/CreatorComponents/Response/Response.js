@@ -42,10 +42,6 @@ const Response = () => {
             ans.push(temp)
         })
 
-        console.log("ans :")
-        console.log(ans)
-        console.log(headers)
-
         setCSVReport({
             data: ans,
             headers: headers,
@@ -74,7 +70,6 @@ const Response = () => {
                         </div>
 
                     })
-
                 }
 
                 {
