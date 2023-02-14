@@ -9,10 +9,15 @@
 .container-left{
   background-color: #B793C2;
   width: 50%;
+
   height: auto;
+
   margin: 40px 20px;
   border-radius: 7px;
   display: grid;
+  overflow: scroll;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 
 
 }
@@ -42,6 +47,7 @@
   border-radius: 7px;
   margin-left: auto;
   margin-right: auto;
+  cursor: pointer;
   
 }
 
@@ -61,6 +67,7 @@
   margin-top: -10%; */
   /* margin-bottom: -500px; */
   border-radius: 7px;
+  cursor: pointer;
 
   top:20%;
   right: 200px;
@@ -76,6 +83,7 @@
   color: white;
   font-size: 19px;
   line-height: 1.5;
+  cursor: pointer;
 
 }
 

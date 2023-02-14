@@ -19,13 +19,11 @@ class CreateForm extends Component {
     this.state = {
       fields: [],
       name: "",
-      formConfiguration: []
-
+      formConfiguration: [],
     };
 
     this.getFormData();
   }
-
 
   elements = [
     { name: "Email" },
@@ -37,7 +35,7 @@ class CreateForm extends Component {
     { name: "CheckboxAnswer" },
     { name: "short_ans" },
     { name: "LongAnswer" },
-    { name: "FileUpload" }
+    { name: "FileUpload" },
   ];
 
   MCQCount = 0;
@@ -53,132 +51,154 @@ class CreateForm extends Component {
   AddressCount = 0;
   CheckBoxCount = 0;
 
-
   getFormData = async () => {
     if (this.props.formID) {
-      const apiRes = await formApi.get('/getFormByID', { params: { formID: this.props.formID, email: this.props.email } })
+      const apiRes = await formApi.get("/getFormByID", {
+        params: { formID: this.props.formID, email: this.props.email },
+      });
 
-      if (apiRes.data.status === false) return alert('Something went wrong!');
+      if (apiRes.data.status === false) return alert("Something went wrong!");
 
-      this.addFormName(apiRes.data.data.formName)
+      this.addFormName(apiRes.data.data.formName);
 
-      apiRes?.data?.data?.fields.map((form) => {
+
+      apiRes.data.data.fields.map((form) => {
         if (form.type === 'MCQ') {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
-              <MCQ id={form.id} label={form.label} options={form.options} addFormConfiguration={this.addFormConfiguration} />,
+              <MCQ
+                id={form.id}
+                label={form.label}
+                options={form.options}
+                addFormConfiguration={this.addFormConfiguration}
+              />,
             ],
           }));
 
           this.MCQCount = this.MCQCount + 1;
-        }
-
-        else if (form.type === "short_ans") {
+        } else if (form.type === "short_ans") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
-              <ShortAns id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
+              <ShortAns
+                id={form.id}
+                label={form.label}
+                addFormConfiguration={this.addFormConfiguration}
+              />,
             ],
           }));
 
           this.ShortAnsCount = this.ShortAnsCount + 1;
-        }
-
-
-        else if (form.type === "Date") {
+        } else if (form.type === "Date") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
-              <Date id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
+              <Date
+                id={form.id}
+                label={form.label}
+                addFormConfiguration={this.addFormConfiguration}
+              />,
             ],
           }));
 
           this.DateCount = this.DateCount + 1;
-        }
-
-        else if (form.type === "Email") {
+        } else if (form.type === "Email") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
-              <Email id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
+              <Email
+                id={form.id}
+                label={form.label}
+                addFormConfiguration={this.addFormConfiguration}
+              />,
             ],
           }));
 
           this.EmailCount = this.EmailCount + 1;
-        }
-
-        else if (form.type === "LongAnswer") {
+        } else if (form.type === "LongAnswer") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
-              <LongAns id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
+              <LongAns
+                id={form.id}
+                label={form.label}
+                addFormConfiguration={this.addFormConfiguration}
+              />,
             ],
           }));
 
           this.LongAnsCount = this.LongAnsCount + 1;
-        }
-
-        else if (form.type === "Phone") {
+        } else if (form.type === "Phone") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
-              <Phone id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
+              <Phone
+                id={form.id}
+                label={form.label}
+                addFormConfiguration={this.addFormConfiguration}
+              />,
             ],
           }));
 
           this.PhoneCount = this.PhoneCount + 1;
-        }
-
-
-        else if (form.type === "Time") {
+        } else if (form.type === "Time") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
-              <Time id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
+              <Time
+                id={form.id}
+                label={form.label}
+                addFormConfiguration={this.addFormConfiguration}
+              />,
             ],
           }));
 
           this.TimeCount = this.TimeCount + 1;
-        }
-
-        else if (form.type === "Address") {
+        } else if (form.type === "Address") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
-              <Address id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
+              <Address
+                id={form.id}
+                label={form.label}
+                addFormConfiguration={this.addFormConfiguration}
+              />,
             ],
           }));
 
           this.AddressCount = this.AddressCount + 1;
-        }
-
-
-        else if (form.type === "FileUpload") {
+        } else if (form.type === "FileUpload") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
-              <FileUpload id={form.id} label={form.label} addFormConfiguration={this.addFormConfiguration} />,
+              <FileUpload
+                id={form.id}
+                label={form.label}
+                addFormConfiguration={this.addFormConfiguration}
+              />,
             ],
           }));
 
           this.FileUploadCount = this.FileUploadCount + 1;
-        }
-
-        else if (form.type === "CheckboxAnswer") {
+        } else if (form.type === "CheckboxAnswer") {
           this.setState((prevState) => ({
             fields: [
               ...prevState.fields,
-              <Checkbox id={form.id} label={form.label} options={form.options} addFormConfiguration={this.addFormConfiguration} />,
+              <Checkbox
+                id={form.id}
+                label={form.label}
+                options={form.options}
+                addFormConfiguration={this.addFormConfiguration}
+              />,
             ],
           }));
 
           this.CheckBoxCount = this.CheckBoxCount + 1;
         }
-      })
-
+      });
     }
-  }
+  };
 
   addFormConfiguration = (field) => {
     var objIndex = this.state.formConfiguration.findIndex(
@@ -190,37 +210,39 @@ class CreateForm extends Component {
     } else {
       this.state.formConfiguration[objIndex] = field;
     }
-
-
   };
 
   addFormName = (name) => {
     this.setState({ name: name });
   };
 
-
-
   handlePublish = async () => {
     console.log("Fields :");
     console.log(this.state.formConfiguration);
 
-    const querRes = await formApi.post('/saveform', { formConf: { formID: this.props.formID, formName: this.state.name, fields: this.state.formConfiguration }, email: this.props.email })
+    const querRes = await formApi.post("/saveform", {
+      formConf: {
+        formID: this.props.formID,
+        formName: this.state.name,
+        fields: this.state.formConfiguration,
+      },
+      email: this.props.email,
+    });
 
     if (querRes.data.status === true) {
-      this.props.navigate(`/${this.props.email}/publish`, { state: { formID: querRes.data.data.formID } })
+      this.props.navigate(`/${this.props.email}/publish`, {
+        state: { formID: querRes.data.data.formID },
+      });
+    } else {
+      alert(querRes.data.massage);
     }
-
-    else {
-      alert(querRes.data.massage)
-    }
-
-
   };
 
   handlePreview = async () => {
-    this.props.navigate(`/${this.props.email}/preview`, { state: { form: this.state.formConfiguration, email: this.props.email } });
+    this.props.navigate(`/${this.props.email}/preview`, {
+      state: { form: this.state.formConfiguration, email: this.props.email },
+    });
   };
-
 
   //Drag and drop handlers
   onDragStart = (ev, id) => {
@@ -236,7 +258,12 @@ class CreateForm extends Component {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,
-          <MCQ id={`MCQ_${this.MCQCount}`} label={""} options={['otpion 1']} addFormConfiguration={this.addFormConfiguration} />,
+          <MCQ
+            id={`MCQ_${this.MCQCount}`}
+            label={""}
+            options={["Option 1"]}
+            addFormConfiguration={this.addFormConfiguration}
+          />,
         ],
       }));
 
@@ -246,7 +273,8 @@ class CreateForm extends Component {
         fields: [
           ...prevState.fields,
           <ShortAns
-            id={`ShortAns_${this.ShortAnsCount}`} label={""}
+            id={`ShortAns_${this.ShortAnsCount}`}
+            label={""}
             addFormConfiguration={this.addFormConfiguration}
           />,
         ],
@@ -258,19 +286,20 @@ class CreateForm extends Component {
         fields: [
           ...prevState.fields,
           <Date
-            id={`Date_${this.DateCount}`} label={""}
+            id={`Date_${this.DateCount}`}
+            label={""}
             addFormConfiguration={this.addFormConfiguration}
           />,
         ],
       }));
       this.DateCount = this.DateCount + 1;
-
     } else if (ev.dataTransfer.getData("fieldID") === "Email") {
       this.setState((prevState) => ({
         fields: [
           ...prevState.fields,
           <Email
-            id={`Email_${this.EmailCount}`} label={""}
+            id={`Email_${this.EmailCount}`}
+            label={""}
             addFormConfiguration={this.addFormConfiguration}
           />,
         ],
@@ -281,7 +310,8 @@ class CreateForm extends Component {
         fields: [
           ...prevState.fields,
           <LongAns
-            id={`LongAns_${this.LongAnsCount}`} label={""}
+            id={`LongAns_${this.LongAnsCount}`}
+            label={""}
             addFormConfiguration={this.addFormConfiguration}
           />,
         ],
@@ -292,7 +322,8 @@ class CreateForm extends Component {
         fields: [
           ...prevState.fields,
           <Phone
-            id={`Phone_${this.PhoneCount}`} label={""}
+            id={`Phone_${this.PhoneCount}`}
+            label={""}
             addFormConfiguration={this.addFormConfiguration}
           />,
         ],
@@ -303,7 +334,8 @@ class CreateForm extends Component {
         fields: [
           ...prevState.fields,
           <Time
-            id={`Time_${this.TimeCount}`} label={""}
+            id={`Time_${this.TimeCount}`}
+            label={""}
             addFormConfiguration={this.addFormConfiguration}
           />,
         ],
@@ -314,7 +346,8 @@ class CreateForm extends Component {
         fields: [
           ...prevState.fields,
           <FileUpload
-            id={`FileUpload_${this.FileUploadCount}`} label={""}
+            id={`FileUpload_${this.FileUploadCount}`}
+            label={""}
             addFormConfiguration={this.addFormConfiguration}
           />,
         ],
@@ -325,7 +358,8 @@ class CreateForm extends Component {
         fields: [
           ...prevState.fields,
           <Address
-            id={`Address_${this.AddressCount}`} label={""}
+            id={`Address_${this.AddressCount}`}
+            label={""}
             addFormConfiguration={this.addFormConfiguration}
           />,
         ],
@@ -336,7 +370,9 @@ class CreateForm extends Component {
         fields: [
           ...prevState.fields,
           <Checkbox
-            id={`Checkbox_${this.CheckBoxCount}`} label={""} options={['checkbox 1']}
+            id={`Checkbox_${this.CheckBoxCount}`}
+            label={""}
+            options={["Checkbox 1"]}
             addFormConfiguration={this.addFormConfiguration}
           />,
         ],
@@ -388,11 +424,13 @@ class CreateForm extends Component {
             <Heading name={this.state.name} addFormName={this.addFormName} />
 
             <ul>
-              {
-                this.state.fields.map((el, index) => {
-                  return <li className="added-elements" style={{ marginBottom: "20px" }} key={index}>{el}</li>
-                })
-              }
+              {this.state.fields.map((el, index) => {
+                return (
+                  <li className="added-elements" key={index}>
+                    {el}
+                  </li>
+                );
+              })}
             </ul>
 
             <div

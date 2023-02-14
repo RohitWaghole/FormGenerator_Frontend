@@ -45,7 +45,7 @@ const MCQ = (props) => {
         {options.map((op, index) => {
           return (
             <div key={index} className="element-input">
-              <input type="radio" value={op} name={op} />
+              <input type="radio" value={op} name={props.id} />
               <span> </span>
               <label>
                 <input
