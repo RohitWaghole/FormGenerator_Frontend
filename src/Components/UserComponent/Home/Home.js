@@ -42,6 +42,9 @@ const Home = (props) => {
 
       {!showForm ? <><div>
         <div className="container-left">
+
+
+
           <div className="main" style={{ marginBottom: "20px" }}><span>Created Forms</span></div>
           {
             forms?.map((form, index) => {
@@ -54,6 +57,7 @@ const Home = (props) => {
                       <button id={form.formID} onClick={(e)=>{navigate(`/${email}/${e.target.id}/responses`)}}>Responses</button>
                     </div>
             })}
+
         </div>
       </div >
         <div className="container" >
