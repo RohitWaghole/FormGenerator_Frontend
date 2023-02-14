@@ -44,16 +44,6 @@ const Home = (props) => {
         <div className="container-left">
 
 
-          <div className="main" style={{marginBottom:"20px"}}><span>Created Forms</span></div>          
-          {
-          forms?.map((form,index)=>{
-            return <div className="subItem" key={index} style={{marginBottom:"20px"}} ><span id={form.formID} onClick={(e)=>{
-              setFormID(e.target.id)
-              setShowForm(true);
-            }
-          } className="boxFont">{form.formName}</span><i id={form.formID} className="fa fa-trash delete" onClick={handleDeleteForm} aria-hidden="true"></i></div>
-
-          })}
 
           <div className="main" style={{ marginBottom: "20px" }}><span>Created Forms</span></div>
           {

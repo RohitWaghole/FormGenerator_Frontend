@@ -12,8 +12,8 @@ const AboutUs = (props) => {
     <div className="about-root">
     <Navbar />
     <div className="info">
-    <h2 className="aboutHead">Welcome to Form Generator</h2>
-    <p className="aboutPara">Welcome to <b>Form Generator Website</b>, the ultimate tool for creating forms in an easy and efficient manner.<br />
+    <h2 className="aboutHead fade-in">Welcome to Form Generator</h2>
+    <p className="aboutPara slideIn">Welcome to <b>Form Generator Website</b>, the ultimate tool for creating forms in an easy and efficient manner.<br />
 
     We understand that creating forms can be a time-consuming and tedious task, and that's why we created <b>Form Generator Website.</b> <br />Our platform offers a quick and user-friendly solution to generate forms in just a few clicks. Whether you're creating a survey, contact form, or a feedback form, our platform has you covered.
 
