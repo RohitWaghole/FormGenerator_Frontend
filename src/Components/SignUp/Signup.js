@@ -3,11 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 import handleSingup from "../Auth/HandleSignup.js";
 
-
 const Signup = () => {
-
   const navigate = useNavigate();
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,8 +12,12 @@ const Signup = () => {
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmPassword.value;
 
-    if (email === '' || password === '' || confirmPassword === '' || email === null || password === null || confirmPassword === null) {
-      alert("All detals are mandatory !")
+    if (email === "" || password === "" || confirmPassword === "" || email === null || password === null || confirmPassword === null) {
+      alert("All details are mandatory !");
+    } 
+
+    else if(password!==confirmPassword){
+        alert("Password does not match !")
     }
 
     else {
@@ -25,14 +26,16 @@ const Signup = () => {
         password: password,
         confirmPassword: confirmPassword,
       };
-
+      
       const accessFlag = await handleSingup(userInput);
 
       if (accessFlag === true) {
-        alert("User Registered Succesfully")
-      }
-      else {
-        alert("Failed, try again")
+        event.target.email.value=""
+        event.target.password.value=""
+        event.target.confirmPassword.value=""
+        alert("User Registered Succesfully");
+      } else {
+        alert("Failed, try again");
       }
     }
   };
@@ -47,9 +50,7 @@ const Signup = () => {
         <h1>Sign Up</h1>
         <form action="" onSubmit={handleSubmit}>
           <div className="item">
-            <label className="label" htmlFor="email">
-              
-            </label>
+            <label className="label" htmlFor="email"></label>
             <input
               className="item1 input"
               type="text"
@@ -61,9 +62,7 @@ const Signup = () => {
           </div>
 
           <div className="item">
-            <label className="label" htmlFor="password">
-              
-            </label>
+            <label className="label" htmlFor="password"></label>
             <input
               className="item1 input"
               type="password"
@@ -75,9 +74,7 @@ const Signup = () => {
           </div>
 
           <div className="item">
-            <label className="label" htmlFor="confirmPassword">
-              
-            </label>
+            <label className="label" htmlFor="confirmPassword"></label>
             <input
               className="item1 input"
               type="password"
@@ -94,7 +91,16 @@ const Signup = () => {
         </form>
         <div className="item">
           <span>
-            Already have an account? <button className="navigation" onClick={() => { navigate('/') }}> Log in</button>
+            Already have an account?{" "}
+            <button
+              className="navigation"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              {" "}
+              Log in
+            </button>
           </span>
         </div>
       </div>

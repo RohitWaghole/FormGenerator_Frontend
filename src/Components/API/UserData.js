@@ -1,4 +1,6 @@
 import axios from 'axios'
+import env from "react-dotenv";
+
 
 const userApi = axios.create({
     baseURL: "http://localhost:5000/user/",
