@@ -12,25 +12,27 @@ const Signup = () => {
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmPassword.value;
 
-    if (
-      email === "" ||
-      password === "" ||
-      confirmPassword === "" ||
-      email === null ||
-      password === null ||
-      confirmPassword === null
-    ) {
+    if (email === "" || password === "" || confirmPassword === "" || email === null || password === null || confirmPassword === null) {
       alert("All details are mandatory !");
-    } else {
+    } 
+
+    else if(password!==confirmPassword){
+        alert("Password does not match !")
+    }
+
+    else {
       const userInput = {
         email: email,
         password: password,
         confirmPassword: confirmPassword,
       };
-
+      
       const accessFlag = await handleSingup(userInput);
 
       if (accessFlag === true) {
+        event.target.email.value=""
+        event.target.password.value=""
+        event.target.confirmPassword.value=""
         alert("User Registered Succesfully");
       } else {
         alert("Failed, try again");

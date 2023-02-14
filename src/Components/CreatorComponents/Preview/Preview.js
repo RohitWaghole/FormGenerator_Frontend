@@ -1,19 +1,14 @@
 import React from 'react'
-import { useLocation, useParams } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import "./Preview.css";
 
 const Preview = (props) => {
-  const location = useLocation();
-
-  const { email } = useParams();
 
   return (
     <div>
-      <Navbar email={email} />
       <div className="preview-root">
         <h2 className="preview-heading">Form Preview</h2>
-        {location.state?.form.map((field, index) => {
+        <div style={{ textAlign:"center"}}>
+        {props.formConf?.map((field, index) => {
           return (
             <div className="preview-card" key={index}>
               <label className="preview-label">{field.label}</label>
@@ -65,6 +60,10 @@ const Preview = (props) => {
             </div>
           );
         })}
+      <button onClick={()=>{ 
+        props.setShowPreview(false); 
+        }}>Go Back</button>
+        </div>
       </div>
     </div>
   );

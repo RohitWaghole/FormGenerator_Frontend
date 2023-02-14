@@ -28,7 +28,7 @@ const UserEnd = (props) => {
         form[objIndex].ans = e.target.value;
     }
 
-    const handleOptionChange=(e)=>{
+    const handleOptionChange = (e) => {
 
         var objIndex = form.findIndex(
             (obj) => obj.id === e.target.name
@@ -37,12 +37,11 @@ const UserEnd = (props) => {
         form[objIndex].ans = e.target.value;
     }
 
-    const hanadleSubmit=async(e)=>{
+    const hanadleSubmit = async (e) => {
         e.preventDefault();
-        const apiRes=await resApi.post('/saveresponse',{data:form,formID:formID})
-        console.log(apiRes.data)
+        const apiRes = await resApi.post('/saveresponse', { data: form, formID: formID })
 
-        if(apiRes.data.status===true){
+        if (apiRes.data.status === true) {
             alert(apiRes.data.massage)
         }
     }
@@ -53,13 +52,18 @@ const UserEnd = (props) => {
     }, [])
 
     return (
-        <div>
-            <h1>User End</h1>
+        <div style={{ marginTop: "20px", marginBottom: "50px", width: "100%", textAlign: "center", margin: "auto" }}>
+            <div style={{ marginTop: "20px", marginBottom: "50px", width: "100%", textAlign: "center", margin: "auto" }}>
+                <h1>
+                    User End
+                </h1>
+            </div>
+
 
             <div>
                 {
                     form?.map((field, index) => {
-                        return(
+                        return (
                             <div key={index} style={{ marginTop: "20px", width: "100%", textAlign: "center", margin: "auto" }}>
                                 <label>{field.label}</label>
                                 <br />
@@ -73,7 +77,7 @@ const UserEnd = (props) => {
                                                 field.options.map((op, index) => {
                                                     return (
                                                         <div key={index} className="element-input">
-                                                            <input type="radio" value={op} onChange={(e)=>handleOptionChange(e)} name={field.id} />
+                                                            <input type="radio" value={op} onChange={(e) => handleOptionChange(e)} name={field.id} />
                                                             <span> </span>
                                                             <label>
                                                                 <input className="element-border-style" value={op} id={index} placeholder="Enter your option" />
@@ -87,13 +91,13 @@ const UserEnd = (props) => {
                                         : <div><input type={field.type} id={field.id} onChange={(e) => { handleAnswerChange(e) }} /></div>
                                 }
                                 <br />
-                                <hr />
+                                <hr style={{ textAlign: "center", margnin: "auto", width: "100%" }}></hr>
                             </div>
                         );
                     })
                 }
             </div>
-            <button style={{ textAlign: "center", margin: "auto" }} onClick={(e)=>{hanadleSubmit(e)}}>Submit</button>
+            <button style={{ textAlign: "center", margin: "auto" }} onClick={(e) => { hanadleSubmit(e) }}>Submit</button>
         </div>
     )
 

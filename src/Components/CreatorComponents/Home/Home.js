@@ -1,16 +1,13 @@
 import React from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from '../Navbar/Navbar.js'
-import formApi from "../../API/FormData";
-import CreateForm from "../CreateForm/CreateForm";
+import formApi from "../../API/FormData.js";
 import "./Home.css";
 import 'font-awesome/css/font-awesome.min.css';
 
 const Home = (props) => {
   const [forms, setForms] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [formID, setFormID] = useState("")
 
   const navigate = useNavigate();
 
@@ -40,7 +37,7 @@ const Home = (props) => {
       <Navbar email={email} />
 
 
-      {!showForm ? <><div>
+      <div>
         <div className="container-left">
 
 
@@ -50,8 +47,8 @@ const Home = (props) => {
             forms?.map((form, index) => {
               return <div className="subItem" key={index} style={{ marginBottom: "20px" }} >
                       <span id={form.formID} onClick={(e) => {
-                        setFormID(e.target.id)
-                        setShowForm(true);
+                        navigate(`/${email}/edit`,{state:{formID:e.target.id}})
+                        
                       }} className="boxFont">{form.formName}</span>
                       <i id={form.formID} className="fa fa-trash delete" onClick={handleDeleteForm} aria-hidden="true"></i>
                       <button id={form.formID} onClick={(e)=>{navigate(`/${email}/${e.target.id}/responses`)}}>Responses</button>
@@ -62,9 +59,10 @@ const Home = (props) => {
       </div >
         <div className="container" >
           <button className="createBtn" onClick={(e) => {
-            setShowForm(true)
+            e.preventDefault();
+            navigate(`/${email}/edit`)
           }}>Create New Form <i className="fa fa-solid fa-plus" aria-hidden="true"></i></button>
-        </div></> : <CreateForm navigate={navigate} email={email} formID={formID} />}
+        </div>
     </div >
 
   );
