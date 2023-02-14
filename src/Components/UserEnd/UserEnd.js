@@ -1,3 +1,4 @@
+import React from 'react'
 import formApi from "../API/FormData";
 import resApi from '../API/ResData.js'
 import { useEffect, useState } from "react"
@@ -25,7 +26,15 @@ const UserEnd = (props) => {
         );
 
         form[objIndex].ans = e.target.value;
-        console.log(form)
+    }
+
+    const handleOptionChange=(e)=>{
+
+        var objIndex = form.findIndex(
+            (obj) => obj.id === e.target.name
+        );
+
+        form[objIndex].ans = e.target.value;
     }
 
     const hanadleSubmit=async(e)=>{
@@ -50,7 +59,7 @@ const UserEnd = (props) => {
             <div>
                 {
                     form?.map((field, index) => {
-                        return (
+                        return(
                             <div key={index} style={{ marginTop: "20px", width: "100%", textAlign: "center", margin: "auto" }}>
                                 <label>{field.label}</label>
                                 <br />
@@ -64,7 +73,7 @@ const UserEnd = (props) => {
                                                 field.options.map((op, index) => {
                                                     return (
                                                         <div key={index} className="element-input">
-                                                            <input type="radio" value={op} name={op} />
+                                                            <input type="radio" value={op} onChange={(e)=>handleOptionChange(e)} name={field.id} />
                                                             <span> </span>
                                                             <label>
                                                                 <input className="element-border-style" value={op} id={index} placeholder="Enter your option" />
@@ -75,7 +84,7 @@ const UserEnd = (props) => {
                                             }
 
                                         </div>
-                                        : <><input type={field.type} id={field.id} onChange={(e) => { handleAnswerChange(e) }} /></>
+                                        : <div><input type={field.type} id={field.id} onChange={(e) => { handleAnswerChange(e) }} /></div>
                                 }
                                 <br />
                                 <hr />
