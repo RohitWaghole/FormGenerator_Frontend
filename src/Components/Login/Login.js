@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import handleLogin from "../Auth/HandleLogin";
 import { useNavigate } from "react-router-dom";
@@ -7,15 +7,24 @@ import { useNavigate } from "react-router-dom";
 const Login = (props) => {
   const navigate = useNavigate();
 
+  const [dailog, setDialog] = useState('');
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const email = event.target.email.value;
     const password = event.target.password.value;
 
+    var atposition = email.indexOf("@");
+    var dotposition = email.lastIndexOf(".")
+
     //validation
     if (email === '' || password === '' || email === null || password === null) {
-      alert("All detals are mandatory !") 
+      setDialog("All details are mandatory !")
+    }
+
+    else if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length) {
+      setDialog("Please enter a valid e-mail address");
     }
 
     else {
@@ -28,12 +37,10 @@ const Login = (props) => {
 
       if (accessFlag === true) {
         //navigate to User Home Page
-        props.getEmail(email)
-        navigate(`/${email}/home`,{state:{email:email}}) 
-      }
-      else {
+        setDialog("Logged in !")
 
-       alert("Invalid Details!") 
+        props.getEmail(email)
+        navigate(`/${email}/home`, { state: { email: email } })
       }
     }
   };
@@ -49,7 +56,7 @@ const Login = (props) => {
         <form action="" onSubmit={handleSubmit}>
           <div className="item">
             <label className="label" htmlFor="email">
-              
+
             </label>
             <input
               className="item1"
@@ -63,7 +70,7 @@ const Login = (props) => {
 
           <div className="item">
             <label className="label" htmlFor="password">
-              
+
             </label>
             <input
               className="item1 item2"
@@ -87,6 +94,9 @@ const Login = (props) => {
           <span>
             Don't have an account? <button className="navigation" onClick={() => { navigate('/signup') }}> Sign up</button>
           </span>
+        </div>
+        <div style={{ marginTop: "30px" }}>
+          <h4 style={{ color: "black" }}>{dailog}</h4>
         </div>
       </div>
     </div>

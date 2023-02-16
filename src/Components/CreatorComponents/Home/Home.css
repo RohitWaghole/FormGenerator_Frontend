@@ -7,7 +7,7 @@
 
 
 .container-left{
-  background-color: #B793C2;
+  background-color: black;
   width: 50%;
 
   height: auto;
@@ -47,7 +47,6 @@
   border-radius: 7px;
   margin-left: auto;
   margin-right: auto;
-  cursor: pointer;
   
 }
 
@@ -57,8 +56,12 @@
   padding-left: 10px;
 }
 
+.boxFont{
+  cursor: pointer;
+}
+
 .container{
-  background-color: #B793C2;
+  background-color: black;
   width: 200px;
   /* height: 100px; */
   /* float: right; */
@@ -69,7 +72,8 @@
   border-radius: 7px;
   cursor: pointer;
 
-  top:20%;
+  top:12%;
+  /* margin-top: 20px; */
   right: 200px;
 
 }

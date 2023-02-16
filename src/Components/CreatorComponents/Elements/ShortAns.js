@@ -11,7 +11,7 @@ const ShortAns = (props) => {
   useEffect(() => {
     const field = {
       id: props.id,
-      type: "short_ans",
+      type: "shortAns",
       label: label,
     };
     props.addFormConfiguration(field);

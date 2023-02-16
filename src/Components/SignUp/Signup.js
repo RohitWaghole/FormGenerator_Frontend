@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 import handleSingup from "../Auth/HandleSignup.js";
@@ -6,19 +6,29 @@ import handleSingup from "../Auth/HandleSignup.js";
 const Signup = () => {
   const navigate = useNavigate();
 
+  const [dailog,setDialog]=useState("");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmPassword.value;
 
-    if (email === "" || password === "" || confirmPassword === "" || email === null || password === null || confirmPassword === null) {
-      alert("All details are mandatory !");
-    } 
+    var atposition = email.indexOf("@");
+    var dotposition = email.lastIndexOf(".")
 
-    else if(password!==confirmPassword){
-        alert("Password does not match !")
+    if (email === "" || password === "" || confirmPassword === "" || email === null || password === null || confirmPassword === null) {
+      setDialog("All details are mandatory !");
     }
+
+    else if (password !== confirmPassword) {
+      setDialog("Password does not match !")
+    }
+
+    else if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length) {
+      setDialog("Please enter a valid e-mail address");
+    }
+
 
     else {
       const userInput = {
@@ -26,16 +36,14 @@ const Signup = () => {
         password: password,
         confirmPassword: confirmPassword,
       };
-      
+
       const accessFlag = await handleSingup(userInput);
 
       if (accessFlag === true) {
-        event.target.email.value=""
-        event.target.password.value=""
-        event.target.confirmPassword.value=""
-        alert("User Registered Succesfully");
-      } else {
-        alert("Failed, try again");
+        event.target.email.value = ""
+        event.target.password.value = ""
+        event.target.confirmPassword.value = ""
+        setDialog("User Registered Succesfully");
       }
     }
   };
@@ -103,7 +111,11 @@ const Signup = () => {
             </button>
           </span>
         </div>
+        <div style={{marginTop:"30px"}}>
+        <h4 style={{color:"black"}}>{dailog}</h4>
       </div>
+      </div>
+      
     </div>
   );
 };

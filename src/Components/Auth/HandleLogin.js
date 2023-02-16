@@ -6,9 +6,11 @@ const handleLogin = async (userCred) => {
     const res = await userApi.post('/login', userCred);
     
     if(res.data.status===true){
-        console.log(res.data.massage)
-        localStorage.setItem(userCred.username, res.data.token)
+        localStorage.setItem(userCred.email, res.data.token)
         return true;
+    }
+    else{
+        alert(res.data.massage)
     }
     
     console.log(res.data.massage)

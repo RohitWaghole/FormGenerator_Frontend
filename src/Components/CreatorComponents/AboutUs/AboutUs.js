@@ -1,9 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import "./AboutUs.css";
 import Navbar from '../Navbar/Navbar.js';
-import aboutUsImg from "./aboutUs.png";
 const AboutUs = (props) => {
 
 

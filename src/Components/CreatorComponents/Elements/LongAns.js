@@ -11,7 +11,7 @@ const LongAns = (props) => {
   useEffect(() => {
     const field = {
       id: props.id,
-      type: "LongAns",
+      type: "longAns",
       label: label,
     };
     props.addFormConfiguration(field);

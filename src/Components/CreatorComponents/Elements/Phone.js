@@ -11,7 +11,7 @@ const Phone = (props) => {
   useEffect(() => {
     const field = {
       id: props.id,
-      type: "Phone",
+      type: "tel",
       label: label,
     };
     props.addFormConfiguration(field);

@@ -5,17 +5,17 @@
   }
  
 .info{
-    background-color: #B793C2;
+    background-color: black;
     border-radius: 7px;
     width: 720px;
     height: 550px;
-    margin-top: 100px;
+    margin-top: 11vh;
     margin-left: 100px;
 }
 
 .aboutHead{
     padding-top: 15px;
-    color: #000000;
+    color: white;
     text-align: center;
     margin-bottom: 17px;
     
@@ -39,13 +39,13 @@
 }
 
 .containerGrid{
-    background-color: #B793C2;
+    background-color: black;
     border-radius: 7px;
     width: 400px;
     height: 500px;
     position: fixed;
     right: 13%;
-    top: 24%;
+    top: 20%;
     display: grid;
     grid-template-columns: 370px;
     grid-template-rows: 5px 150px 80px 80px 80px 80px;
@@ -71,7 +71,7 @@
 }
 
 .elementSubmit{
-    background-color: #B793C2;
+    background-color: black;
     margin-left: 73px;
     margin-right: 50px;
     padding-top: 15px;
@@ -83,6 +83,7 @@
 }
 
 .gridGenerator{
+    color: white;
     margin-left: 125px;
     margin-top: 25px;
     font-size: 20px;
@@ -95,6 +96,7 @@ hr{
 }
 
 .submitBtn{
+  color: white;
     margin-left: 77px;
     padding-top: 80px;
     

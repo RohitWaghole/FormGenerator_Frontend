@@ -11,7 +11,7 @@ const Email = (props) => {
   useEffect(() => {
     const field = {
       id: props.id,
-      type: "Email",
+      type: "email",
       label: label,
     };
     props.addFormConfiguration(field);
@@ -28,7 +28,7 @@ const Email = (props) => {
       <input
         className="element-input element-border-style"
         placeholder="example@example.com"
-        type={"email"}
+        type="email"
         // onChange={handleLabelChange}
         size={40}
       />

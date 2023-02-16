@@ -1,8 +1,8 @@
 .container-root1 {
   display: flex;
-  height: 100%;
+  /* height: auto; */
   margin: 0;
-  background-color: #f3f3fe;
+  /* background-color: w; */
 }
 
 .container-drag {
@@ -11,25 +11,30 @@
   background-color: #f3f3fe;
   color: rgb(0, 0, 0);
   margin-right: 12px;
-  height: 623px;
+  height: 100vh;
   overflow-x: hidden;
+  padding-top: 20px;
+
 }
 
 .container-right {
-  background-color: #f3f3fe;
+  background-color: white;
   width: 70%;
   /* margin: 10px 0 0 10px; */
   margin-right: 0;
-  height: 623px;
-  /* height: 100%; */
+  /* height: auto; */
+  height: 100vh;
   overflow: scroll;
   overflow-x: hidden;
+  padding-top: 20px;
+
+
 }
 
 .elements-btn {
   margin: 0 20px 2px 20px;
 
-  background-color: #b793c2;
+  background-color: black;
   border: 2px solid white;
   color: white;
   padding: 20px;
@@ -40,7 +45,7 @@
 .elements-btn:hover {
   cursor: -webkit-grab;
   cursor: grab;
-  background-color: #ca91db;
+  background-color: black;
 }
 
 .task-header {

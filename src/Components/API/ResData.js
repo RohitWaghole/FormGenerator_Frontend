@@ -1,8 +1,8 @@
 import axios from 'axios'
-import env from "react-dotenv";
+import configData from '../../Config/Config.json'
 
 const resApi = axios.create({
-    baseURL: "http://localhost:5000/response/",
+    baseURL: configData.api.resApi,
     timeout: 5000,
     headers: {
       'Accept-Version': 1,

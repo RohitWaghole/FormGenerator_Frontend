@@ -1,9 +1,9 @@
 import axios from 'axios'
-import env from "react-dotenv";
-
+import configData from '../../Config/Config.json'
 
 const userApi = axios.create({
-    baseURL: "http://localhost:5000/user/",
+  
+    baseURL: configData.api.userApi,
     timeout: 5000,
     headers: {
       'Accept-Version': 1,

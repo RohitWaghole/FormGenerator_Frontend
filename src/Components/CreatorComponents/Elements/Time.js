@@ -11,7 +11,7 @@ const Time = (props) => {
   useEffect(() => {
     const field = {
       id: props.id,
-      type: "Time",
+      type: "time",
       label: label,
     };
     props.addFormConfiguration(field);

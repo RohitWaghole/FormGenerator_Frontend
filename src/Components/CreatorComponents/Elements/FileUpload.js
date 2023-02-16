@@ -11,7 +11,7 @@ const FileUpload = (props) => {
   useEffect(() => {
     const field = {
       id: props.id,
-      type: "FileUpload",
+      type: "file",
       label: label,
     };
     props.addFormConfiguration(field);

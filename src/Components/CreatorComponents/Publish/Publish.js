@@ -1,15 +1,17 @@
 import React from 'react'
 import Navbar from "../Navbar/Navbar";
-import { useLocation,useParams } from "react-router-dom";
+import { useLocation,useParams,useNavigate } from "react-router-dom";
 
 
 const Publish=(props)=>{
+    const navigate=useNavigate();
     const location=useLocation();
     const {email}=useParams();
 
     const hostname=window.location.hostname
     const port=window.location.port
     const formID=location.state.formID
+    const url=`http://${hostname}:${port}/userend/${formID}`;
 
     return(
         <div>
@@ -17,7 +19,9 @@ const Publish=(props)=>{
             <h1>Publish Form</h1>
             <div>
                 <h2>Generated Link :</h2>
-                <a>{`http://${hostname}:${port}/userend/${formID}`}</a>
+
+                <h3 style={{color:"blue",cursor:"pointer" }} >{url}</h3>
+                <button onClick={() => { navigator.clipboard.writeText(url) }}>Copy to clipboard</button>
             </div>
         </div>
     )

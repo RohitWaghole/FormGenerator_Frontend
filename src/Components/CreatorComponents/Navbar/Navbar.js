@@ -13,8 +13,9 @@ const Navbar = (props) => {
       <nav className="navbar">
         <ul className="menu">
           <div>
+            
             <li className="logo">
-              <a className="navigate" onMouseOver={(event)=>{event.target.style.cursor='pointer'}}>
+              <a style={{fontFamily:"fantasy",fontWeight:"bolder" }} className="navigate" onMouseOver={(event)=>{event.target.style.cursor='pointer'}}>
                 Form Generator
               </a>
             </li>

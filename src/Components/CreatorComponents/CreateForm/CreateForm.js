@@ -14,183 +14,215 @@ import Address from "../Elements/Address.js";
 import Checkbox from "../Elements/Checkbox.js";
 import Navbar from "../Navbar/Navbar.js";
 import Preview from "../Preview/Preview.js";
+import HandleSaveForm from "./HandleSaveForm.js";
 import "./CreateForm.css";
 
-const CreateForm = (props) => {
-    const navigate=useNavigate();
-    const location=useLocation();
-    const {email}=useParams();
+const counts = {
+    email: 0,
+    date: 0,
+    time: 0,
+    address: 0,
+    tel: 0,
+    MCQ: 0,
+    checkbox: 0,
+    shortAns: 0,
+    longAns: 0,
+    fileUpload: 0
+}
 
-    const [showPreview,setShowPreview]=useState(false);
+
+const CreateForm = (props) => {
+
+    const [formConfiguration, setFormConfiguration] = useState([]);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { email } = useParams();
+
+    const [showPreview, setShowPreview] = useState(false);
     const [fields, setFields] = useState([])
     const [name, setName] = useState("")
-    const [formConfiguration,setFormConfiguration] =useState([]);
+    const [allowDuplicate, setAllowDuplicate] = useState(false);
 
-    var formID=""
+    const accessToken = localStorage.getItem(email);
 
-    if(location.state) formID=location.state.formID
+    var formID = ""
+
+    if (location.state) formID = location.state.formID
+
 
     var elements = [
-        { name: "Email" },
-        { name: "Date" },
-        { name: "Time" },
-        { name: "Address" },
-        { name: "Phone" },
+        { name: "email" },
+        { name: "date" },
+        { name: "time" },
+        { name: "adress" },
+        { name: "tel" },
         { name: "MCQ" },
-        { name: "CheckboxAnswer" },
-        { name: "short_ans" },
-        { name: "LongAnswer" },
-        { name: "FileUpload" },
+        { name: "checkbox" },
+        { name: "shortAns" },
+        { name: "longAns" },
+        { name: "file" },
     ];
 
-    var MCQCount = 0;
-    var ShortAnsCount = 0;
-    var DateCount = 0;
-    var EmailCount = 0;
-    var LongAnsCount = 0;
-    var PhoneCount = 0;
-    var TimeCount = 0;
-    var FileUploadCount = 0;
-    var AddressCount = 0;
-    var CheckBoxCount = 0;
+    const setComponentList = (type, id, label, options) => {
+
+        if (type === 'MCQ') {
+            setFields((oldFields) => ([
+                ...oldFields,
+                <MCQ
+                    id={id}
+                    label={label}
+                    options={options}
+                    addFormConfiguration={addFormConfiguration}
+                />]));
+
+            counts.MCQ = counts.MCQ + 1;
+        }
+        else if (type === "shortAns") {
+            setFields((oldFields) => ([
+                ...oldFields,
+                <ShortAns
+                    id={id}
+                    label={label}
+                    addFormConfiguration={addFormConfiguration}
+                />,
+            ]));
+
+            counts.shortAns = counts.shortAns + 1;
+        }
+        else if (type === "date") {
+            setFields((oldFields) => ([
+                ...oldFields,
+                <Date
+                    id={id}
+                    label={label}
+                    addFormConfiguration={addFormConfiguration}
+                />,
+            ]));
+
+            counts.date = counts.date + 1;
+        }
+        else if (type === "email") {
+            setFields((oldFields) => ([
+                ...oldFields,
+                <Email
+                    id={id}
+                    label={label}
+                    addFormConfiguration={addFormConfiguration}
+                />,
+            ]));
+
+            counts.email = counts.email + 1;
+        }
+        else if (type === "longAns") {
+            setFields((oldFields) => ([
+                ...oldFields,
+                <LongAns
+                    id={id}
+                    label={label}
+                    addFormConfiguration={addFormConfiguration}
+                />,
+            ]));
+
+            counts.longAns = counts.longAns + 1;
+        }
+        else if (type === "tel") {
+            setFields((oldFields) => ([
+                ...oldFields,
+                <Phone
+                    id={id}
+                    label={label}
+                    addFormConfiguration={addFormConfiguration}
+                />,
+            ]));
+
+            counts.tel = counts.tel + 1;
+        }
+        else if (type === "time") {
+            setFields((oldFields) => ([
+                ...oldFields,
+                <Time
+                    id={id}
+                    label={label}
+                    addFormConfiguration={addFormConfiguration}
+                />,
+            ]));
+
+            counts.time = counts.time + 1;
+        }
+        else if (type === "adress") {
+            setFields((oldFields) => ([
+                ...oldFields,
+                <Address
+                    id={id}
+                    label={label}
+                    addFormConfiguration={addFormConfiguration}
+                />,
+            ]));
+
+            counts.address = counts.address + 1;
+        }
+        else if (type === "file") {
+            setFields((oldFields) => ([
+                ...oldFields,
+                <FileUpload
+                    id={id}
+                    label={label}
+                    addFormConfiguration={addFormConfiguration}
+                />,
+            ]));
+
+            counts.fileUpload = counts.fileUpload + 1;
+        }
+        else if (type === "checkbox") {
+            setFields((oldFields) => ([
+                ...oldFields,
+                <Checkbox
+                    id={id}
+                    label={label}
+                    options={options}
+                    addFormConfiguration={addFormConfiguration}
+                />,
+            ]));
+
+            counts.checkbox = counts.checkbox + 1;
+        }
+    }
+
+    const renderForm = (formData) => {
+        setName(formData.formName)
+        setAllowDuplicate(formData.allowDuplicate)
+        setFields([])
+
+        formData.fields.map((form) => {
+            setComponentList(form.type, form.id, form.label, form.options)
+        });
+    }
 
     const getFormData = async () => {
-        if (formID) {
+        const apiRes = await formApi.get("/getFormByID", {
+            params: { formID: formID, email: email },
+            headers: { 'authorization': accessToken }
+        });
 
-            const apiRes = await formApi.get("/getFormByID", {
-                params: { formID: formID, email: email },
-            });
+        if (apiRes.data.status === false) return alert("Something went wrong!");
 
-            if (apiRes.data.status === false) return alert("Something went wrong!");
-
-            setName(apiRes.data.data.formName)
-
-            apiRes.data.data.fields.map((form) => {
-                if (form.type === 'MCQ') {
-                    setFields([...fields,
-                    <MCQ
-                        id={form.id}
-                        label={form.label}
-                        options={form.options}
-                        addFormConfiguration={addFormConfiguration}
-                    />]);
-
-                    MCQCount = MCQCount + 1;
-                }
-                else if (form.type === "short_ans") {
-                    setFields([...fields,
-                    <ShortAns
-                        id={form.id}
-                        label={form.label}
-                        addFormConfiguration={addFormConfiguration}
-                    />,
-                    ]);
-
-                    ShortAnsCount = ShortAnsCount + 1;
-                }
-                else if (form.type === "Date") {
-                    setFields([...fields,
-                    <Date
-                        id={form.id}
-                        label={form.label}
-                        addFormConfiguration={addFormConfiguration}
-                    />,
-                    ]);
-
-                    DateCount = DateCount + 1;
-                }
-                else if (form.type === "Email") {
-                    setFields([...fields,
-                    <Email
-                        id={form.id}
-                        label={form.label}
-                        addFormConfiguration={addFormConfiguration}
-                    />,
-                    ]);
-
-                    EmailCount = EmailCount + 1;
-                }
-                else if (form.type === "LongAnswer") {
-                    setFields([...fields,
-                    <LongAns
-                        id={form.id}
-                        label={form.label}
-                        addFormConfiguration={addFormConfiguration}
-                    />,
-                    ]);
-
-                    LongAnsCount = LongAnsCount + 1;
-                }
-                else if (form.type === "Phone") {
-                    setFields([...fields,
-                    <Phone
-                        id={form.id}
-                        label={form.label}
-                        addFormConfiguration={addFormConfiguration}
-                    />,
-                    ]);
-
-                    PhoneCount = PhoneCount + 1;
-                }
-                else if (form.type === "Time") {
-                    setFields([...fields,
-                    <Time
-                        id={form.id}
-                        label={form.label}
-                        addFormConfiguration={addFormConfiguration}
-                    />,
-                    ]);
-
-                    TimeCount = TimeCount + 1;
-                }
-                else if (form.type === "Address") {
-                    setFields([...fields,
-                    <Address
-                        id={form.id}
-                        label={form.label}
-                        addFormConfiguration={addFormConfiguration}
-                    />,
-                    ]);
-
-                    AddressCount = AddressCount + 1;
-                }
-                else if (form.type === "FileUpload") {
-                    setFields([...fields,
-                    <FileUpload
-                        id={form.id}
-                        label={form.label}
-                        addFormConfiguration={addFormConfiguration}
-                    />,
-                    ]);
-
-                    FileUploadCount = FileUploadCount + 1;
-                }
-                else if (form.type === "CheckboxAnswer") {
-                    setFields([...fields,
-                    <Checkbox
-                        id={form.id}
-                        label={form.label}
-                        options={form.options}
-                        addFormConfiguration={addFormConfiguration}
-                    />,
-                    ]);
-
-                    CheckBoxCount = CheckBoxCount + 1;
-                }
-            });
+        else {
+            renderForm(apiRes.data.data);
         }
     };
 
-    useEffect(()=>{
-        getFormData();
-    },[])
+    useEffect(() => {
+        if (formID) {
+            getFormData();
+        }
+    }, [])
 
 
     const addFormConfiguration = (field) => {
         var objIndex = formConfiguration.findIndex(
             (obj) => obj.id === field.id
         );
-
         if (objIndex === -1) {
             formConfiguration.push(field);
         } else {
@@ -198,29 +230,11 @@ const CreateForm = (props) => {
         }
     };
 
-    const addFormName = (name) => {
-        setName(name);
-    };
-
     const handlePublish = async () => {
-        console.log("Fields :");
-        console.log(formConfiguration);
+        const res = await HandleSaveForm(email, formConfiguration, name, formID, allowDuplicate);
 
-        const querRes = await formApi.post("/saveform", {
-            formConf: {
-                formID: formID,
-                formName: name,
-                fields: formConfiguration,
-            },
-            email: email,
-        });
-
-        if (querRes.data.status === true) {
-            console.log(props)
-            navigate(`/${email}/publish`, {state: { formID: querRes.data.data.formID }});
-        } 
-        else {
-            alert(querRes.data.massage);
+        if (res) {
+            navigate(`/${email}/publish`, { state: { formID: res.formID } });
         }
     };
 
@@ -234,110 +248,13 @@ const CreateForm = (props) => {
     };
 
     const onDrop = (ev) => {
-        if (ev.dataTransfer.getData("fieldID") === "MCQ") {
-            setFields([...fields,
-            <MCQ
-                id={`MCQ_${MCQCount}`}
-                label={""}
-                options={["Option 1"]}
-                addFormConfiguration={addFormConfiguration}
-            />,
-            ]);
+        ev.preventDefault();
+        var type = ev.dataTransfer.getData("fieldID");
+        var label = ""
+        var id = `${type}_${counts[type]}`
+        var options = ['option 1']
 
-            MCQCount = MCQCount + 1;
-        }
-        else if (ev.dataTransfer.getData("fieldID") === "short_ans") {
-            setFields([...fields,
-            <ShortAns
-                id={`ShortAns_${ShortAnsCount}`}
-                label={""}
-                addFormConfiguration={addFormConfiguration}
-            />,
-            ]);
-
-            ShortAnsCount = ShortAnsCount + 1;
-        }
-        else if (ev.dataTransfer.getData("fieldID") === "Date") {
-            setFields([...fields,
-            <Date
-                id={`Date_${DateCount}`}
-                label={""}
-                addFormConfiguration={addFormConfiguration}
-            />,
-            ]);
-            DateCount = DateCount + 1;
-        }
-        else if (ev.dataTransfer.getData("fieldID") === "Email") {
-            setFields([...fields,
-            <Email
-                id={`Email_${EmailCount}`}
-                label={""}
-                addFormConfiguration={addFormConfiguration}
-            />,
-            ]);
-            EmailCount = EmailCount + 1;
-        }
-        else if (ev.dataTransfer.getData("fieldID") === "LongAnswer") {
-            setFields([...fields,
-            <LongAns
-                id={`LongAns_${LongAnsCount}`}
-                label={""}
-                addFormConfiguration={addFormConfiguration}
-            />,
-            ]);
-            LongAnsCount = LongAnsCount + 1;
-        }
-        else if (ev.dataTransfer.getData("fieldID") === "Phone") {
-            setFields([...fields,
-            <Phone
-                id={`Phone_${PhoneCount}`}
-                label={""}
-                addFormConfiguration={addFormConfiguration}
-            />,
-            ]);
-            PhoneCount = PhoneCount + 1;
-        }
-        else if (ev.dataTransfer.getData("fieldID") === "Time") {
-            setFields([...fields,
-            <Time
-                id={`Time_${TimeCount}`}
-                label={""}
-                addFormConfiguration={addFormConfiguration}
-            />,
-            ]);
-            TimeCount = TimeCount + 1;
-        }
-        else if (ev.dataTransfer.getData("fieldID") === "FileUpload") {
-            setFields([...fields,
-            <FileUpload
-                id={`FileUpload_${FileUploadCount}`}
-                label={""}
-                addFormConfiguration={addFormConfiguration}
-            />,
-            ]);
-            FileUploadCount = FileUploadCount + 1;
-        }
-        else if (ev.dataTransfer.getData("fieldID") === "Address") {
-            setFields([...fields,
-            <Address
-                id={`Address_${AddressCount}`}
-                label={""}
-                addFormConfiguration={addFormConfiguration}
-            />,
-            ]);
-            AddressCount = AddressCount + 1;
-        }
-        else if (ev.dataTransfer.getData("fieldID") === "CheckboxAnswer") {
-            setFields([...fields,
-            <Checkbox
-                id={`Checkbox_${CheckBoxCount}`}
-                label={""}
-                options={["Checkbox 1"]}
-                addFormConfiguration={addFormConfiguration}
-            />,
-            ]);
-            CheckBoxCount = CheckBoxCount + 1;
-        }
+        setComponentList(type, id, label, options)
     };
 
     var allElements = [];
@@ -357,68 +274,81 @@ const CreateForm = (props) => {
 
     return (
         <div>
-            <Navbar email={email}/>
-            
-            {!showPreview?<div className="container-root1">
-                <div className="container-drag">
-                    <div className="task-header">
-                        <h2>All Elements</h2>
-                    </div>
+            <Navbar email={email} />
 
-                    <div
-                        className="elementList"
-                        onDragOver={(e) => onDragOver(e)}
-                        onDrop={(e) => {
-                            onDrop(e);
-                        }}
-                    >
-                        {allElements}
-                    </div>
-                </div>
-
-                {/* right container */}
-                <div className="container-right" id="container-right">
-                    <div className="task-header">
-                        <h2>Form</h2>
-                    </div>
-                    <Heading name={name} key={name} addFormName={addFormName}/>
-
-                    <ul>
-                        {fields.map((el, index) => {
-                            return (
-                                <li className="added-elements" key={index}>
-                                    {el}
-                                </li>
-                            );
-                        })}
-                    </ul>
-
-                    <div
-                        className="droppable-area"
-                        onDragOver={(e) => onDragOver(e)}
-                        onDrop={(e) => onDrop(e)}
-                        id="target-div"
-                    >
-                        <div className="drag-text">Drag Here</div>
-                    </div>
-                    <div className="publish-preview-btn">
-                        <div className="publish-btn-div">
-                            <button className="publish-btn" onClick={handlePublish}>
-                                Publish{" "}
-                            </button>
+            {showPreview ? <div> <Preview setShowPreview={setShowPreview} formConf={formConfiguration} /> </div>
+                : <div className="container-root1">
+                    <div className="container-drag">
+                        <div className="task-header">
+                            <h2>All Elements</h2>
                         </div>
 
-                        <div className="publish-btn-div">
-                            <button className="publish-btn" onClick={(e)=>{
-                                console.log("here")
-                                setShowPreview(true);
-                            }}>
-                                Preview{" "}
-                            </button>
+                        <div
+                            className="elementList"
+                            onDragOver={(e) => onDragOver(e)}
+                            onDrop={(e) => {
+                                onDrop(e);
+                            }}
+                        >
+                            {allElements}
                         </div>
                     </div>
-                </div>
-            </div> : <div> <Preview setShowPreview={setShowPreview} formConf={formConfiguration}/> </div>}
+
+                    {/* right container */}
+                    <div className="container-right" id="container-right">
+                        <div className="task-header">
+                            <h2>Form</h2>
+                        </div>
+                        <Heading name={name} key={name} addFormName={setName} />
+
+                        <div style={{ marginBottom: "50px" }} className="element-name">
+                            <label className="element-input element-gap element-border-style">Enter Your Email</label>
+                            <br></br>
+                            <input className="element-input element-gap element-border-style" placeholder="user email here" />
+                            <hr style={{ width: "100%" }}></hr>
+                        </div>
+
+                        <ul>
+                            {fields.map((el, index) => {
+                                return (
+                                    <li className="added-elements" key={index}>
+                                        {el}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+
+                        <div
+                            className="droppable-area"
+                            onDragOver={(e) => onDragOver(e)}
+                            onDrop={(e) => onDrop(e)}
+                            id="target-div"
+                        >
+                            <div className="drag-text">Drag Here</div>
+                        </div>
+
+                        <div>
+                            <label>Allow Duplicate</label>
+                            <input type="checkbox" checked={allowDuplicate} onChange={(e) => { setAllowDuplicate(e.target.checked) }}></input>
+                        </div>
+
+                        <div className="publish-preview-btn">
+                            <div className="publish-btn-div">
+                                <button className="publish-btn" onClick={handlePublish}>
+                                    Publish{" "}
+                                </button>
+                            </div>
+
+                            <div className="publish-btn-div">
+                                <button className="publish-btn" onClick={(e) => {
+                                    setShowPreview(true);
+                                }}>
+                                    Preview{" "}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>}
         </div>
     );
 }

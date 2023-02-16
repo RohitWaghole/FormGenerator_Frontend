@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const MCQ = (props) => {
+const Checkbox = (props) => {
   const [options, setOptions] = useState(props.options);
   const [label, setLabel] = useState(props.label);
 
@@ -9,7 +9,7 @@ const MCQ = (props) => {
   var count = options.length;
 
   const handleAddOption = () => {
-    setOptions([...options, `Checkbox ${count + 1}`]);
+    setOptions([...options, `choice ${count + 1}`]);
   };
 
   const handleOptionChange = (e) => {
@@ -25,7 +25,7 @@ const MCQ = (props) => {
   useEffect(() => {
     const field = {
       id: props.id,
-      type: "Checkbox",
+      type: "checkbox",
       label: label,
       options: options,
     };
@@ -68,4 +68,4 @@ const MCQ = (props) => {
   );
 };
 
-export default MCQ;
+export default Checkbox;
